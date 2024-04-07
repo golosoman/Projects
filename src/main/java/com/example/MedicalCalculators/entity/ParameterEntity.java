@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,6 +19,6 @@ public class ParameterEntity {
     private Long id;
     private String name;
 
-    @ManyToMany(mappedBy = "parameter")
-    private List<CalculatorEntity> calculator;
+    @ManyToMany(mappedBy = "parameter", fetch = FetchType.LAZY)
+    private Set<CalculatorEntity> calculator;
 }
