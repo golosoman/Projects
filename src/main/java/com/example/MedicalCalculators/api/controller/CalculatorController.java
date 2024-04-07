@@ -1,8 +1,8 @@
 package com.example.MedicalCalculators.api.controller;
 
 import com.example.MedicalCalculators.entity.CalculatorEntity;
-import com.example.MedicalCalculators.exceptions.CalculatorAlreadyExistsException;
-import com.example.MedicalCalculators.exceptions.CalculatorNotFoundException;
+import com.example.MedicalCalculators.exceptions.AlreadyExistsException;
+import com.example.MedicalCalculators.exceptions.NotFoundException;
 import com.example.MedicalCalculators.service.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,49 +19,38 @@ public class CalculatorController {
         try {
             calculatorService.add(calculator);
             return ResponseEntity.ok("Калькулятор успешно создан");
-        } catch (CalculatorAlreadyExistsException e) {
+        } catch (AlreadyExistsException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
 
     @GetMapping
-    public ResponseEntity getAll(){
+    public ResponseEntity getAll() {
         try {
             return ResponseEntity.ok(calculatorService.getAll());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getOne(@PathVariable Long id){
+    public ResponseEntity getOne(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(calculatorService.getOne(id));
-        } catch (CalculatorNotFoundException e){
+        } catch (NotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
 
-//    @GetMapping
-//    public ResponseEntity getByName(@RequestParam String calculatorName){
-//        try {
-//            return ResponseEntity.ok(calculatorService.getByName(calculatorName));
-//        } catch (CalculatorNotFoundException e){
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        } catch (Exception e){
-//            return ResponseEntity.badRequest().body("Произошла ошибка");
-//        }
-//    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(calculatorService.delete(id));
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
     }
