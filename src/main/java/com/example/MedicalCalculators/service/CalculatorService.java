@@ -28,8 +28,8 @@ public class CalculatorService {
         return Calculator.toModel(calculator);
     }
 
-    public Iterable<CalculatorEntity> getAll() {
-        return calculatorRepository.findAll();
+    public Iterable<Calculator> getAll() {
+        return Calculator.toModelList(calculatorRepository.findAll());
     }
 
     public Long delete(Long id) throws NotFoundException {

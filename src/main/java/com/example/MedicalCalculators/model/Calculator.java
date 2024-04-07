@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,5 +26,12 @@ public class Calculator {
         return model;
     }
 
-//    public static List<Calculator> toModel(Iterable<CalculatorEntity> entities)
+    public static List<Calculator> toModelList(Iterable<CalculatorEntity> entities) {
+        List<Calculator> list = new ArrayList<Calculator>();
+        entities.forEach((entity) -> {
+            Calculator model = Calculator.toModel(entity);
+            list.add(model);
+        });
+        return list;
+    }
 }

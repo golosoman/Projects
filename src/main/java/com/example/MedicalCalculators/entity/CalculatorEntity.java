@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,11 +21,11 @@ public class CalculatorEntity {
     private String description;
     private String formula;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "CalculatorParameter",
-            joinColumns = @JoinColumn(name = "calculator_id"),
-            inverseJoinColumns = @JoinColumn(name = "parameter_id")
+            joinColumns = {@JoinColumn(name = "calculator_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "parameter_id", referencedColumnName = "id")}
     )
-    private List<ParameterEntity> parameter;
+    private Set<ParameterEntity> parameter;
 }
