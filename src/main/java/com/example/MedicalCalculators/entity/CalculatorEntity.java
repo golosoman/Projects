@@ -21,11 +21,11 @@ public class CalculatorEntity {
     private String description;
     private String formula;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "CalculatorParameter",
-            joinColumns = {@JoinColumn(name = "calculator_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "parameter_id", referencedColumnName = "id")}
-    )
-    private Set<ParameterEntity> parameter;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "CalculatorParameter",
+//            joinColumns = {@JoinColumn(name = "calculator_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "parameter_id", referencedColumnName = "id")}
+//    )
+//    private Set<ParameterEntity> parameter;
 }
