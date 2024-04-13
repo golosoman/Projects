@@ -64,8 +64,8 @@ public class CalculatorService {
         }
         return switch (name){
             case "calculatorTitrationRate" -> (new CalculatorTitrations()).calculate(parameters);
-            case "calculatorBodyMassIndex" -> (new CalculatorBodyMassIndex(calculator.getParameter())).calculate(parameters);
-            case "calculatorRateIntravenousDripDrug" -> (new CalculatorRateIntravenousDripDrug(calculator.getParameter())).calculate(parameters);
+            case "calculatorBodyMassIndex" -> (new CalculatorBodyMassIndex()).calculate(parameters);
+            case "calculatorRateIntravenousDripDrug" -> (new CalculatorRateIntravenousDripDrug()).calculate(parameters);
             default -> throw new NotFoundException("Калькулятор не найден");
         };
     }
