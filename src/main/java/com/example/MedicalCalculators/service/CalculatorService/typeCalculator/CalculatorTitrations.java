@@ -1,25 +1,17 @@
 package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
-import com.example.MedicalCalculators.entity.ParameterEntity;
 import com.example.MedicalCalculators.exceptions.ParameterException;
 import com.example.MedicalCalculators.model.result.Result;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-@Component
-@Getter
-@Setter
-public class CalculatorLeftMyocardialMasses implements ICalculator {
-    private Set<String> key;
-    public CalculatorLeftMyocardialMasses(Set<ParameterEntity> parameterKeys){
-        key = parameterKeys.stream().map(ParameterEntity::getName).collect(Collectors.toSet());
-    }
+public class CalculatorTitrations implements ICalculator {
+    private final Set<String> key = new HashSet<>(Set.of("weightPatient", "dosage",
+            "amountOfDrug", "volumeOfSolution"));
+
     @Override
     public Result calculate(Map<String, String> parameters) throws ParameterException {
         if (!key.equals(parameters.keySet())) {
@@ -35,4 +27,5 @@ public class CalculatorLeftMyocardialMasses implements ICalculator {
             throw new ParameterException("Неверно указаны параметры!");
         }
         return Result.toModel((new DecimalFormat("#.###")).format(infusionRate));
-}}
+    }
+}

@@ -1,6 +1,5 @@
 package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
-import com.example.MedicalCalculators.entity.ParameterEntity;
 import com.example.MedicalCalculators.exceptions.ParameterException;
 import com.example.MedicalCalculators.model.result.Result;
 import lombok.Getter;
@@ -8,18 +7,15 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 @Getter
 @Setter
 public class CalculatorBodyMassIndex implements ICalculator{
-    private Set<String> key;
-    public CalculatorBodyMassIndex(Set<ParameterEntity> parameterKeys){
-        key = parameterKeys.stream().map(ParameterEntity::getName).collect(Collectors.toSet());
-    }
+    private final Set<String> key = new HashSet<>(Set.of("weightPatient", "height"));
     @Override
     public Result calculate(Map<String, String> parameters) throws ParameterException {
         if (!key.equals(parameters.keySet())) {
