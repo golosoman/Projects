@@ -1,4 +1,4 @@
-package com.example.MedicalCalculators.model;
+package com.example.MedicalCalculators.model.calculator;
 
 import com.example.MedicalCalculators.entity.CalculatorEntity;
 import lombok.Getter;
