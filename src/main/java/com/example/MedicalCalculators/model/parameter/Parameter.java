@@ -1,6 +1,5 @@
-package com.example.MedicalCalculators.model;
+package com.example.MedicalCalculators.model.parameter;
 
-import com.example.MedicalCalculators.entity.CalculatorEntity;
 import com.example.MedicalCalculators.entity.ParameterEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

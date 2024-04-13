@@ -1,11 +1,9 @@
 package com.example.MedicalCalculators.service;
 
-import com.example.MedicalCalculators.entity.CalculatorEntity;
 import com.example.MedicalCalculators.entity.ParameterEntity;
 import com.example.MedicalCalculators.exceptions.AlreadyExistsException;
 import com.example.MedicalCalculators.exceptions.NotFoundException;
-import com.example.MedicalCalculators.model.Calculator;
-import com.example.MedicalCalculators.model.Parameter;
+import com.example.MedicalCalculators.model.parameter.Parameter;
 import com.example.MedicalCalculators.repository.ParameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

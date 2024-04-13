@@ -1,10 +1,8 @@
 package com.example.MedicalCalculators.api.controller;
 
-import com.example.MedicalCalculators.entity.CalculatorEntity;
 import com.example.MedicalCalculators.entity.ParameterEntity;
 import com.example.MedicalCalculators.exceptions.AlreadyExistsException;
 import com.example.MedicalCalculators.exceptions.NotFoundException;
-import com.example.MedicalCalculators.service.CalculatorService;
 import com.example.MedicalCalculators.service.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
