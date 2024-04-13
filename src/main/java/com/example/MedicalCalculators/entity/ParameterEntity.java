@@ -18,6 +18,7 @@ public class ParameterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+//    private String value;
 
     @ManyToMany(mappedBy = "parameter", fetch = FetchType.LAZY)
     private Set<CalculatorEntity> calculator;
