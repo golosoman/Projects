@@ -37,10 +37,10 @@ public class ExceptionApiHandler {
     }
 
     @ExceptionHandler(ParameterException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ErrorMessage alreadyExistsException(ParameterException exception, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
-                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_ACCEPTABLE.value(),
                 new Date(),
                 exception.getMessage(),
                 request.getDescription(false)
