@@ -1,83 +1,68 @@
 package com.example.MedicalCalculators.api.controller;
 
-import com.example.MedicalCalculators.entity.CalculatorEntity;
-import com.example.MedicalCalculators.exceptions.AlreadyExistsException;
-import com.example.MedicalCalculators.exceptions.NotFoundException;
-import com.example.MedicalCalculators.exceptions.ParameterException;
+import com.example.MedicalCalculators.dto.request.BMICalculatorRequest;
+import com.example.MedicalCalculators.dto.request.RIDDCalculatorRequest;
+import com.example.MedicalCalculators.dto.request.TitrationCalculatorRequest;
+import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
+import com.example.MedicalCalculators.dto.response.CalculatorInfo;
+import com.example.MedicalCalculators.dto.request.CalculatorInfoRequest;
+import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.service.CalculatorService.CalculatorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/calculator")
 public class CalculatorController {
-    @Autowired
-    private CalculatorService calculatorService;
-
-    @PostMapping
-    public ResponseEntity add(@RequestBody CalculatorEntity calculator) {
-        try {
-            calculatorService.add(calculator);
-            return ResponseEntity.ok("Калькулятор успешно создан");
-        } catch (AlreadyExistsException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
-    }
-
-    @GetMapping
-    public ResponseEntity getAll() {
-        try {
-            return ResponseEntity.ok(calculatorService.getAll());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
+    private final CalculatorService calculatorService;
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getOne(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(calculatorService.getOne(id));
-        } catch (NotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
+    public CalculatorInfoFull get(@PathVariable(name = "id") Long id){
+        return calculatorService.getOne(id);
+    }
+
+    @PostMapping
+    public CalculatorInfoFull add(@RequestBody CalculatorInfoRequest calculatorInfoRequest) {
+        return calculatorService.add(calculatorInfoRequest);
+    }
+
+    @GetMapping
+    public List<CalculatorInfoFull> getAll() {
+        return calculatorService.getAll();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(calculatorService.delete(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
+    public CalculatorInfoFull delete(@PathVariable Long id) {
+        return calculatorService.delete(id);
+    }
+
+    @PatchMapping("/{id}")
+    public CalculatorInfoFull update(@PathVariable Long id,
+                                     @RequestBody CalculatorInfoRequest calculatorInfoRequest){
+        return calculatorService.update(id, calculatorInfoRequest);
     }
 
     @GetMapping("/{name}/info")
-    public ResponseEntity getInfo(@PathVariable String name){
-        try{
-            return ResponseEntity.ok(calculatorService.getInfo(name));
-        } catch (NotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
+    public CalculatorInfo getInfo(@PathVariable String name){
+        return calculatorService.getInfo(name);
     }
 
-    @PostMapping("/{name}/result")
-    public ResponseEntity getResult(@PathVariable String name, @RequestBody Map<String, String> parameters){
-        try{
-            return ResponseEntity.ok(calculatorService.getResult(name, parameters));
-        } catch (NotFoundException | ParameterException  e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
+    @PostMapping("/BodyMassIndex/result")
+    public CalculatorResult BMIResult(@RequestBody BMICalculatorRequest calculatorRequest){
+        return calculatorService.getBMIResult(calculatorRequest);
+    }
+
+    @PostMapping("/TitrationRate/result")
+    public CalculatorResult TitrationResult(@RequestBody TitrationCalculatorRequest calculatorRequest){
+        return calculatorService.getTitrationResult(calculatorRequest);
+    }
+
+    @PostMapping("/RateIntravenousDripDrug/result")
+    public CalculatorResult TitrationResult(@RequestBody RIDDCalculatorRequest calculatorRequest){
+        return calculatorService.getRIDDResult(calculatorRequest);
     }
 }
