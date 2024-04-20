@@ -59,19 +59,19 @@ public class CalculatorController {
         return calculatorService.getInfo(name);
     }
 
-    @PostMapping("/BodyMassIndex/result")
+    @PostMapping("/body-mass-index/result")
     @ResponseBody
     public CalculatorResult BMIResult(@RequestBody BMICalculatorRequest calculatorRequest) {
         return calculatorService.getBMIResult(calculatorRequest);
     }
 
-    @PostMapping("/TitrationRate/result")
+    @PostMapping("/titration-rate/result")
     @ResponseBody
     public CalculatorResult TitrationResult(@RequestBody TitrationCalculatorRequest calculatorRequest) {
         return calculatorService.getTitrationResult(calculatorRequest);
     }
 
-    @PostMapping("/RateIntravenousDripDrug/result")
+    @PostMapping("/rate-intravenous-drip-drug/result")
     @ResponseBody
     public CalculatorResult TitrationResult(@RequestBody RIDDCalculatorRequest calculatorRequest) {
         return calculatorService.getRIDDResult(calculatorRequest);
