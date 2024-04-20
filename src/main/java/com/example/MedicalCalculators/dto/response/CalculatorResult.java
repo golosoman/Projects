@@ -1,10 +1,11 @@
 package com.example.MedicalCalculators.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 public class CalculatorResult {
     String result;
