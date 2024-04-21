@@ -1,8 +1,8 @@
 package com.example.MedicalCalculators.api.controller;
 
-import com.example.MedicalCalculators.dto.request.BMICalculatorRequest;
-import com.example.MedicalCalculators.dto.request.RIDDCalculatorRequest;
-import com.example.MedicalCalculators.dto.request.TitrationCalculatorRequest;
+import com.example.MedicalCalculators.dto.request.typeCalculator.BMICalculatorRequest;
+import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
+import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
 import com.example.MedicalCalculators.dto.response.CalculatorInfo;
 import com.example.MedicalCalculators.dto.request.CalculatorInfoRequest;
@@ -28,29 +28,10 @@ public class CalculatorController {
         return calculatorService.getOne(id);
     }
 
-    @PostMapping
-    @ResponseBody
-    public CalculatorInfoFull add(@RequestBody CalculatorInfoRequest calculatorInfoRequest) {
-        return calculatorService.add(calculatorInfoRequest);
-    }
-
     @GetMapping
     @ResponseBody
     public List<CalculatorInfoFull> getAll() {
         return calculatorService.getAll();
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public CalculatorInfoFull delete(@PathVariable Long id) {
-        return calculatorService.delete(id);
-    }
-
-    @PatchMapping("/{id}")
-    @ResponseBody
-    public CalculatorInfoFull update(@PathVariable Long id,
-                                     @RequestBody CalculatorInfoRequest calculatorInfoRequest) {
-        return calculatorService.update(id, calculatorInfoRequest);
     }
 
     @GetMapping("/{name}/info")

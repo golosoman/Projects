@@ -1,33 +1,22 @@
 package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
-import com.example.MedicalCalculators.dto.request.TitrationCalculatorRequest;
+import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
-import com.example.MedicalCalculators.exceptions.ParameterException;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
+public class CalculatorTitrations extends BaseCalculator<TitrationCalculatorRequest> {
 
-@Component
-public class CalculatorTitrations {
+    public CalculatorTitrations() {
+        super(CalculatorType.TITRATIONS, "*Расчет скорости внутривенного капельного введения препарата\nФормула: количество капель в " +
+                "минуту = V*20/t, где V - объем раствора в милилитрах, t - время в минутах, 20 - среднее " +
+                "количество капель в милилитре, v - скорость введения в каплях в минуту");
+    }
+
     // Расчет скорости инфузии препарата через линеомат (скорость титрования),
     // результат в мл/час
     public CalculatorResult calculate(TitrationCalculatorRequest calculatorRequest) {
-//        if (calculatorRequest.getWeightPatient() <= 0){
-//            throw new ParameterException("Incorrect value for WeightPatient");
-//        }
-//        if (calculatorRequest.getDosage() <= 0){
-//            throw new ParameterException("Incorrect value for Dosage");
-//        }
-//        if (calculatorRequest.getAmountOfDrug() <= 0){
-//            throw new ParameterException("Incorrect value for AmountOfDrug");
-//        }
-//        if (calculatorRequest.getVolumeOfSolution() <= 0){
-//            throw new ParameterException("Incorrect value for VolumeOfSolution");
-//        }
         double infusionRate = calculatorRequest.getWeightPatient() * calculatorRequest.getDosage() /
                 (calculatorRequest.getAmountOfDrug() * (1000 /
                         calculatorRequest.getVolumeOfSolution())) * 60;

@@ -1,5 +1,6 @@
-package com.example.MedicalCalculators.dto.request;
+package com.example.MedicalCalculators.dto.request.typeCalculator;
 
+import com.example.MedicalCalculators.dto.request.typeCalculator.BaseCalculatorRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class TitrationCalculatorRequest {
+public class TitrationCalculatorRequest extends BaseCalculatorRequest {
     // Вес пациента, кг
     private Double weightPatient;
     // Дозировка в мкг*кг/мин или мл/час
