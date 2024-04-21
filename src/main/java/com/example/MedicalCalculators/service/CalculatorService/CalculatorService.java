@@ -1,7 +1,5 @@
 package com.example.MedicalCalculators.service.CalculatorService;
 
-//import com.example.MedicalCalculators.entity.CalculatorEntity;
-
 import com.example.MedicalCalculators.dto.request.typeCalculator.BMICalculatorRequest;
 import com.example.MedicalCalculators.dto.request.typeCalculator.BaseCalculatorRequest;
 import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
@@ -10,7 +8,6 @@ import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
 import com.example.MedicalCalculators.dto.response.CalculatorInfo;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.exceptions.NotFoundException;
-//import com.example.MedicalCalculators.repository.CalculatorRepository;
 import com.example.MedicalCalculators.service.CalculatorService.typeCalculator.*;
 import org.springframework.stereotype.Service;
 
@@ -26,18 +23,18 @@ public class CalculatorService {
         calculators.put(CalculatorType.TITRATIONS, new CalculatorTitrations());
     }
 
-    private CalculatorInfoFull findCalculatorById(Long id){
-        for(Map.Entry<CalculatorType, BaseCalculator> entry: calculators.entrySet()) {
-            if (entry.getKey().getId() == id){
+    private CalculatorInfoFull findCalculatorById(Long id) {
+        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
+            if (entry.getKey().getId() == id) {
                 return entry.getValue().getInfoFull();
             }
         }
         throw new NotFoundException("Calculator with ID " + id + " not found");
     }
 
-    private CalculatorInfo findCalculatorByName(String name){
-        for(Map.Entry<CalculatorType, BaseCalculator> entry: calculators.entrySet()) {
-            if (Objects.equals(entry.getKey().getName(), name)){
+    private CalculatorInfo findCalculatorByName(String name) {
+        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
+            if (Objects.equals(entry.getKey().getName(), name)) {
                 return entry.getValue().getInfo();
             }
         }
@@ -54,7 +51,7 @@ public class CalculatorService {
 
     public List<CalculatorInfoFull> getAll() {
         List<CalculatorInfoFull> calculatorsInfo = new ArrayList<>();
-        for(Map.Entry<CalculatorType, BaseCalculator> entry: calculators.entrySet()) {
+        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             calculatorsInfo.add(entry.getValue().getInfoFull());
         }
         return calculatorsInfo;

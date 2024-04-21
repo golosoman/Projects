@@ -5,7 +5,6 @@ import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorR
 import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
 import com.example.MedicalCalculators.dto.response.CalculatorInfo;
-import com.example.MedicalCalculators.dto.request.CalculatorInfoRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.service.CalculatorService.CalculatorService;
 import org.springdoc.core.annotations.ParameterObject;

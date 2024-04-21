@@ -3,7 +3,6 @@ package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.exceptions.ParameterException;
-import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 
