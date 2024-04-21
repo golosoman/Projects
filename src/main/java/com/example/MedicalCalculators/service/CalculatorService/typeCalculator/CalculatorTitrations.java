@@ -2,7 +2,6 @@ package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
 import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
-import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 
