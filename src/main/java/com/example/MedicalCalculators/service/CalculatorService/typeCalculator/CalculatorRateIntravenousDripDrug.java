@@ -1,27 +1,32 @@
 package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
-import com.example.MedicalCalculators.dto.request.RIDDCalculatorRequest;
+import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.exceptions.ParameterException;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
-@Component
-public class CalculatorRateIntravenousDripDrug {
+public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalculatorRequest> {
+    public CalculatorRateIntravenousDripDrug() {
+        super(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG, "*Этот калькулятор позволяет расчитать скорость инфузии препарата через линеомат " +
+                "(скорость титрования в мл/час) при известном количестве препарата в милиграммах в известном " +
+                "объеме раствора. Также необходимо указать вес пациента и дозировку, определяемую либо в " +
+                "мкг*кг/мин, либо в мл/час.\nСкорость в мл/час автоматически пересчитывается в скорость " +
+                "в каплях в минуту при указании дозировки препарата в микрограммах на килограмм в " +
+                "минуту. При этом в рачет берется то, что в 1 милилитр содержит 20 капель.\nЕсли " +
+                "скорость в каплях в минуту менее 1 капли в минуту, калькулятор предлагает " +
+                "выбрать меньшее разведение и перейти с капельного введения на введение с помощью " +
+                "линеомата.\nТакже калькулятор позволяет рассчитать скорость инфузии в мкг*кг/мин при " +
+                "известной дозировке препарата в мл/час.\nДля того, чтобы использовать калькулятор при " +
+                "расчете доз препаратов, не зависящих от веса, в поле \"Вес пациента\" введите значение " +
+                "равное 1.\nФормула: Скорость инфузии = масса тела пациента (кг) * доза препарата " +
+                "(мкг/кг*мин) / (количество препарата в инфузионном растворе (мг) * " +
+                "(1 000/общий объем инфузионного раствора))*60");
+    }
+
     // Расчет скорости внутривенного капельного введения препарата, результат в каплях в минуту
     public CalculatorResult calculate(RIDDCalculatorRequest calculatorRequest) throws ParameterException {
-//        if (calculatorRequest.getVolumeOfSolution() <= 0){
-//            throw new ParameterException("Incorrect value for VolumeOfSolution");
-//        }
-//        if (calculatorRequest.getTimeTaking() <= 0){
-//            throw new ParameterException("Incorrect value for TimeTaking");
-//        }
         double ridd = calculatorRequest.getVolumeOfSolution() * 20 /
                 calculatorRequest.getTimeTaking();
         return new CalculatorResult((new DecimalFormat("#.###")).format(ridd));
