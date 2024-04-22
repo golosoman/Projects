@@ -19,6 +19,7 @@ public class CalculatorBodyMassIndex extends BaseCalculator<BMICalculatorRequest
         log.info("CalculatorBodyMassIndex has been created");
     }
 
+    // Расчет индекса массы тела
     @Override
     public CalculatorResult calculate(BMICalculatorRequest calculatorRequest) {
         if (calculatorRequest.getHeight() <= 0 | calculatorRequest.getHeight() > 300) {
