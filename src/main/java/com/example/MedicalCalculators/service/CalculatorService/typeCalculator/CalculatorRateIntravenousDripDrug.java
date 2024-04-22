@@ -3,9 +3,11 @@ package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
 import com.example.MedicalCalculators.exceptions.ParameterException;
+import lombok.extern.log4j.Log4j2;
 
 import java.text.DecimalFormat;
 
+@Log4j2
 public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalculatorRequest> {
     public CalculatorRateIntravenousDripDrug() {
         super(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG, "*Этот калькулятор позволяет расчитать скорость инфузии препарата через линеомат " +
@@ -22,12 +24,14 @@ public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalcul
                 "равное 1.\nФормула: Скорость инфузии = масса тела пациента (кг) * доза препарата " +
                 "(мкг/кг*мин) / (количество препарата в инфузионном растворе (мг) * " +
                 "(1 000/общий объем инфузионного раствора))*60");
+        log.info("CalculatorRateIntravenousDripDrug has been created");
     }
 
     // Расчет скорости внутривенного капельного введения препарата, результат в каплях в минуту
     public CalculatorResult calculate(RIDDCalculatorRequest calculatorRequest) throws ParameterException {
         double ridd = calculatorRequest.getVolumeOfSolution() * 20 /
                 calculatorRequest.getTimeTaking();
+        log.debug("The result was obtained using a BMI calculator: " + ridd);
         return new CalculatorResult((new DecimalFormat("#.###")).format(ridd));
     }
 }
