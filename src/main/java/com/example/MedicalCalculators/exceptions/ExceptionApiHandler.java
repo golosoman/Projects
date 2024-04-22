@@ -1,6 +1,7 @@
 package com.example.MedicalCalculators.exceptions;
 
 import com.example.MedicalCalculators.exceptions.ErrorMessage;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,6 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Date;
 
 @RestControllerAdvice
+@Log4j2
 public class ExceptionApiHandler {
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -21,6 +23,7 @@ public class ExceptionApiHandler {
                 exception.getMessage(),
                 request.getDescription(false)
         );
+        log.error(message.getMessage());
         return message;
     }
 
@@ -33,6 +36,7 @@ public class ExceptionApiHandler {
                 exception.getMessage(),
                 request.getDescription(false)
         );
+        log.error(message.getMessage());
         return message;
     }
 
@@ -45,6 +49,7 @@ public class ExceptionApiHandler {
                 exception.getMessage(),
                 request.getDescription(false)
         );
+        log.error(message.getMessage());
         return message;
     }
 }
