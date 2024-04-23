@@ -1,6 +1,7 @@
 package com.example.MedicalCalculators.exceptions;
 
 import com.example.MedicalCalculators.exceptions.ErrorMessage;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

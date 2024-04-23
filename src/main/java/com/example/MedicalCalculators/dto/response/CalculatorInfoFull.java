@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Schema(description = "Объект полной ифнормации о калькуляторе")
+@Schema(description = "Объект полной ифнормации о калькуляторе", contentMediaType = "application/json")
 public class CalculatorInfoFull extends CalculatorInfo {
     @Schema(description = "Идентификатор", example = "1")
     private Long id;
