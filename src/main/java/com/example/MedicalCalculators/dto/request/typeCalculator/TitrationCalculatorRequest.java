@@ -20,4 +20,6 @@ public class TitrationCalculatorRequest extends BaseCalculatorRequest {
     private Double amountOfDrug;
     @Schema(description = "Общий объем раствора в мл", example = "50")
     private Double volumeOfSolution;
+    @Schema(description = "Дозировка в мл/час?", example = "true")
+    private Boolean isMlInHour;
 }

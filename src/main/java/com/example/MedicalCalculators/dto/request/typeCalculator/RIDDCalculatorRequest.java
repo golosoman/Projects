@@ -14,6 +14,8 @@ import lombok.Setter;
 public class RIDDCalculatorRequest extends BaseCalculatorRequest {
     @Schema(description = "Объем раствора в мл", example = "60")
     private Double volumeOfSolution;
-    @Schema(description = "Желаемое время введения препарата в минутах", example = "30")
+    @Schema(description = "Желаемое время введения препарата в минутах/часах", example = "30")
     private Double timeTaking;
+    @Schema(description = "Время в минутах?", example = "true")
+    private Boolean isMinute;
 }
