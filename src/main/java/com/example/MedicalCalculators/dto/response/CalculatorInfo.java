@@ -1,6 +1,5 @@
 package com.example.MedicalCalculators.dto.response;
 
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
