@@ -31,7 +31,13 @@ public class CalculatorTitrations extends BaseCalculator<TitrationCalculatorRequ
     // Расчет скорости инфузии препарата через линеомат (скорость титрования),
     // результат в мл/час
     public CalculatorResult calculate(TitrationCalculatorRequest calculatorRequest) {
-        double infusionRate = calculatorRequest.getWeightPatient() * calculatorRequest.getDosage() /
+        double dosage = calculatorRequest.getDosage();
+        // Доза из мл/час в мкг/кг*мин
+        if (calculatorRequest.getIsMlInHour()) {
+            dosage *= 0.001 * calculatorRequest.getVolumeOfSolution() /
+                    (calculatorRequest.getWeightPatient() * 1000 * 60);
+        }
+        double infusionRate = calculatorRequest.getWeightPatient() * dosage /
                 (calculatorRequest.getAmountOfDrug() * (1000 /
                         calculatorRequest.getVolumeOfSolution())) * 60;
         log.debug("The result was obtained using a BMI calculator: " + infusionRate);
