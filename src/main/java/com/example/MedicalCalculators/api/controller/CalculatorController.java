@@ -6,9 +6,8 @@ import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalcul
 import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
 import com.example.MedicalCalculators.dto.response.CalculatorInfo;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
-import com.example.MedicalCalculators.exceptions.ErrorMessage;
-import com.example.MedicalCalculators.exceptions.ExceptionApiHandler;
-import com.example.MedicalCalculators.exceptions.NotFoundException;
+import com.example.MedicalCalculators.exceptions.api.ErrorMessage;
+import com.example.MedicalCalculators.exceptions.validation.ValidationErrorResponse;
 import com.example.MedicalCalculators.service.CalculatorService.CalculatorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,7 +19,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +26,8 @@ import java.util.List;
 @Log4j2
 @Tag(
         name = "Контроллер API калькуляторов",
-        description = "Позволяет получить информацию о медицинских калькуляторах"
+        description = "Позволяет получить информацию о медицинских калькуляторах, " +
+                "а также результаты вычисления на основе принимаемых параметров"
 )
 @RestController
 @RequestMapping("/calculator")
@@ -41,10 +40,10 @@ public class CalculatorController {
     }
 
     @Operation(
-            summary = "Получить калькулятор по его id",
-            description = "Позволяет получить полную информацию о калькуляторе по его идентификатору id. " +
-                    "Информация включает: id - идентификатор калькулятора, name - название калькулятора и " +
-                    "description - описание калькулятора"
+            summary = "Получить калькулятор по его идентификатору",
+            description = "Позволяет получить полную информацию о калькуляторе по его идентификатору \"id\". " +
+                    "Информация включает: \"id\" - идентификатор калькулятора, \"name\" - название калькулятора и " +
+                    "\"info\" - описание калькулятора"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -57,11 +56,15 @@ public class CalculatorController {
                     description = "Калькулятор не был найден по его названию name",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorMessage.class),
-                            examples = @ExampleObject(value = "{\"statusCode\": 404, \"timestamp\": " +
-                                    "\"2024-04-22T17:01:56.160+04:00\", \"message\": " +
-                                    "\"Calculator with ID 5 not found\", \"description\": " +
-                                    "\"Resolved [com.example.MedicalCalculators.exceptions.NotFoundException: " +
-                                    "Calculator with ID 5 not found]\"}")
+                            examples = @ExampleObject(value = "{" +
+                                    "   \"statusCode\": 404, " +
+                                    "   \"timestamp\": \"2024-04-22T17:01:56.160+04:00\", " +
+                                    "   \"message\": \"Calculator with ID 5 not found\", " +
+                                    "   \"description\": \"Resolved " +
+                                    "[сom.example.MedicalCalculators.exceptions.controller.NotFoundException: " +
+                                    "Calculator with ID 5 not found]\"" +
+                                    "}"
+                            )
                     )}
             )
     })
@@ -76,8 +79,8 @@ public class CalculatorController {
     @Operation(
             summary = "Получить список доступных калькуляторов",
             description = "Позволяет получить полную информацию о все калькуляторах, которые можно использовать. " +
-                    "Информация включает: id - идентификатор калькулятора, name - название калькулятора " +
-                    "и description - описание калькулятора"
+                    "Информация включает список из: \"id\" - идентификатор калькулятора, \"name\" - " +
+                    "название калькулятора и \"info\" - описание калькулятора"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -96,8 +99,8 @@ public class CalculatorController {
 
     @Operation(
             summary = "Получение информацию о калькуляторе по его названию",
-            description = "Позволяет получить описание калькулятора по его названию name. Описание включает: " +
-                    "info - описание калькулятора"
+            description = "Позволяет получить описание калькулятора по его названию \"name\". Описание включает: " +
+                    "\"info\" - описание калькулятора"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -110,11 +113,14 @@ public class CalculatorController {
                     description = "Калькулятор не был найден по его названию name",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorMessage.class),
-                            examples = @ExampleObject(value = "{\"statusCode\": 404, \"timestamp\": " +
-                                    "\"2024-04-22T17:01:56.160+04:00\", \"message\": " +
-                                    "\"Calculator with ID 5 not found\", \"description\": " +
-                                    "\"Resolved [com.example.MedicalCalculators.exceptions.NotFoundException: " +
-                                    "Calculator with ID 5 not found]\"}"
+                            examples = @ExampleObject(value = "{" +
+                                    "   \"statusCode\": 404, " +
+                                    "   \"timestamp\": \"2024-04-22T17:01:56.160+04:00\", " +
+                                    "   \"message\": \"Calculator with ID 5 not found\", " +
+                                    "   \"description\": \"Resolved " +
+                                    "[com.example.MedicalCalculators.exceptions.controller.NotFoundException: " +
+                                    "Calculator with ID 5 not found]\"" +
+                                    "}"
                             )
                     )}
             )
@@ -130,7 +136,7 @@ public class CalculatorController {
     @Operation(
             summary = "Получение результата вычисления для калькулятора индекса массы тела",
             description = "Позволяет получить результат вычисления для калькулятора индекса массы тела. " +
-                    "Результат включает: result - результат вычисления в кг/м²"
+                    "Результат включает: \"result\" - результат вычисления в кг/м²"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -142,15 +148,24 @@ public class CalculatorController {
                             )
                     )}
             ),
-            @ApiResponse(responseCode = "406",
+            @ApiResponse(responseCode = "400",
                     description = "Неверно заданы параметры",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorMessage.class),
-                            examples = @ExampleObject(value = "{\"statusCode\": 406, \"timestamp\": " +
-                                    "\"2024-04-22T17:01:56.160+04:00\", \"message\": " +
-                                    "\"Incorrect value for weight\", \"description\": " +
-                                    "\"Resolved [com.example.MedicalCalculators.exceptions.NotAcceptableException: " +
-                                    "Incorrect value for weight]\"}"
+                            schema = @Schema(implementation = ValidationErrorResponse.class),
+                            examples = @ExampleObject(value = "{" +
+                                    "    \"statusCode\": 400," +
+                                    "    \"timestamp\": \"2024-04-26T13:11:44.329+00:00\"," +
+                                    "    \"violations\": [" +
+                                    "        {" +
+                                    "            \"fieldName\": \"The minimum weight value is 10 kg\"," +
+                                    "            \"message\": \"getBMIResult.calculatorRequest.weightPatient\"" +
+                                    "        }," +
+                                    "        {" +
+                                    "            \"fieldName\": \"The height cannot exceed 300 cm\"," +
+                                    "            \"message\": \"getBMIResult.calculatorRequest.height\"" +
+                                    "        }" +
+                                    "    ]" +
+                                    "}"
                             )
                     )}
             )
@@ -167,7 +182,7 @@ public class CalculatorController {
                     "через линеомат(скорость титрования)",
             description = "Позволяет получить результат вычисления для калькулятора расчета скорости инфузии " +
                     "препарата через линеомат(скорость титрования). Результат включает: " +
-                    "result - результат вычисления в мл/час"
+                    "\"result\" - результат вычисления в мкг/кг*мин"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -176,6 +191,35 @@ public class CalculatorController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CalculatorResult.class),
                             examples = @ExampleObject(value = "{\"result\": 13.4}"
+                            )
+                    )}
+            ),
+            @ApiResponse(responseCode = "400",
+                    description = "Неверно заданы параметры",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ValidationErrorResponse.class),
+                            examples = @ExampleObject(value = "{" +
+                                    "    \"statusCode\": 400," +
+                                    "    \"timestamp\": \"2024-04-26T14:25:46.311+00:00\"," +
+                                    "    \"violations\": [" +
+                                    "        {" +
+                                    "            \"fieldName\": \"getTitrationResult.calculatorRequest.dosage\"," +
+                                    "            \"message\": \"The dosage value of the drug is strictly positive\"" +
+                                    "        }," +
+                                    "        {" +
+                                    "            \"fieldName\": \"getTitrationResult.calculatorRequest.amountOfDrug\"," +
+                                    "            \"message\": \"The value of the amount of the drug is strictly positive\"" +
+                                    "        }," +
+                                    "        {" +
+                                    "            \"fieldName\": \"getTitrationResult.calculatorRequest.weightPatient\"," +
+                                    "            \"message\": \"The weight value is strictly positive\"" +
+                                    "        }," +
+                                    "        {" +
+                                    "            \"fieldName\": \"getTitrationResult.calculatorRequest.volumeOfSolution\"," +
+                                    "            \"message\": \"The value of the total volume of the solution is strictly positive\"" +
+                                    "        }" +
+                                    "    ]" +
+                                    "}"
                             )
                     )}
             )
@@ -191,7 +235,7 @@ public class CalculatorController {
             summary = "Получение результата вычисления для калькулятора расчета скорости внутривенного " +
                     "введения препарата",
             description = "Позволяет получить результат вычисления для калькулятора расчета скорости " +
-                    "внутривенного введения препарата Результат включает: result - результат " +
+                    "внутривенного введения препарата Результат включает: \"result\" - результат " +
                     "вычисления в каплях в минуту"
     )
     @ApiResponses(value = {
@@ -201,6 +245,27 @@ public class CalculatorController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CalculatorResult.class),
                             examples = @ExampleObject(value = "{\"result\": 0.7}"
+                            )
+                    )}
+            ),
+            @ApiResponse(responseCode = "400",
+                    description = "Неверно заданы параметры",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ValidationErrorResponse.class),
+                            examples = @ExampleObject(value = "{" +
+                                    "    \"statusCode\": 400," +
+                                    "    \"timestamp\": \"2024-04-26T14:31:57.825+00:00\"," +
+                                    "    \"violations\": [" +
+                                    "        {" +
+                                    "            \"fieldName\": \"getRIDDResult.calculatorRequest.volumeOfSolution\"," +
+                                    "            \"message\": \"The value of the solution volume is strictly positive\"" +
+                                    "        }," +
+                                    "        {" +
+                                    "            \"fieldName\": \"getRIDDResult.calculatorRequest.timeTaking\"," +
+                                    "            \"message\": \"The value of the desired drug administration time is strictly positive\"" +
+                                    "        }" +
+                                    "    ]" +
+                                    "}"
                             )
                     )}
             )

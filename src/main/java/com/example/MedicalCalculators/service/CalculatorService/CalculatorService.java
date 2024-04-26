@@ -1,21 +1,25 @@
 package com.example.MedicalCalculators.service.CalculatorService;
 
 import com.example.MedicalCalculators.dto.request.typeCalculator.BMICalculatorRequest;
-import com.example.MedicalCalculators.dto.request.typeCalculator.BaseCalculatorRequest;
 import com.example.MedicalCalculators.dto.request.typeCalculator.RIDDCalculatorRequest;
 import com.example.MedicalCalculators.dto.request.typeCalculator.TitrationCalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorInfoFull;
 import com.example.MedicalCalculators.dto.response.CalculatorInfo;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
-import com.example.MedicalCalculators.exceptions.NotFoundException;
+import com.example.MedicalCalculators.exceptions.api.NotFoundException;
 import com.example.MedicalCalculators.service.CalculatorService.typeCalculator.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.*;
 
-@Service
 @Log4j2
+@Service
+@Validated
 public class CalculatorService {
     private final Map<CalculatorType, BaseCalculator> calculators = new HashMap<>();
 
@@ -48,7 +52,7 @@ public class CalculatorService {
         throw new NotFoundException("Calculator with name " + name + " not found");
     }
 
-    public CalculatorInfoFull getOne(Long id) {
+    public CalculatorInfoFull getOne(@Min(value = 0, message = "The ID must be at least 0") Long id) {
         CalculatorInfoFull calculatorInfoFull = findCalculatorById(id);
         if (calculatorInfoFull == null) {
             log.warn("Exception will be thrown on method: getOne");
@@ -68,7 +72,7 @@ public class CalculatorService {
         return calculatorsInfo;
     }
 
-    public CalculatorInfo getInfo(String name) {
+    public CalculatorInfo getInfo(@NotBlank(message = "The name of the calculator cannot be empty") String name) {
         CalculatorInfo calculatorInfoFull = findCalculatorByName(name);
         if (calculatorInfoFull == null) {
             log.warn("Exception will be thrown on method: getInfo");
@@ -79,17 +83,17 @@ public class CalculatorService {
 
     }
 
-    public CalculatorResult getBMIResult(BMICalculatorRequest calculatorRequest) {
+    public CalculatorResult getBMIResult(@Valid BMICalculatorRequest calculatorRequest) {
         log.debug("Start method getBMIResult");
         return calculators.get(CalculatorType.BODY_MASS_INDEX).calculate(calculatorRequest);
     }
 
-    public CalculatorResult getTitrationResult(TitrationCalculatorRequest calculatorRequest) {
+    public CalculatorResult getTitrationResult(@Valid TitrationCalculatorRequest calculatorRequest) {
         log.debug("Start method getTitrationResult");
         return calculators.get(CalculatorType.TITRATIONS).calculate(calculatorRequest);
     }
 
-    public CalculatorResult getRIDDResult(RIDDCalculatorRequest calculatorRequest) {
+    public CalculatorResult getRIDDResult(@Valid RIDDCalculatorRequest calculatorRequest) {
         log.debug("Start method getRIDDResult");
         return calculators.get(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG).calculate(calculatorRequest);
     }
