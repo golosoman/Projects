@@ -22,10 +22,10 @@
         <!-- avoid duplicated logs with additivity=false -->
         <Logger name="com.example.MedicalCalculators" level="debug" additivity="false">
             <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToConsole" level="error"/>
         </Logger>
-        <Logger name="com.example.MedicalCalculators" level="info">
+        <Root level="info">
             <AppenderRef ref="LogToConsole"/>
-        </Logger>
-        <Root level="info"></Root>
+        </Root>
     </Loggers>
 </Configuration>
