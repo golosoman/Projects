@@ -1,6 +1,5 @@
-package com.example.MedicalCalculators.exceptions;
+package com.example.MedicalCalculators.exceptions.api;
 
-import java.io.Serial;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {
