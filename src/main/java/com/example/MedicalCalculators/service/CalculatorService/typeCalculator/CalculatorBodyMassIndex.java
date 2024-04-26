@@ -2,7 +2,6 @@ package com.example.MedicalCalculators.service.CalculatorService.typeCalculator;
 
 import com.example.MedicalCalculators.dto.request.typeCalculator.BMICalculatorRequest;
 import com.example.MedicalCalculators.dto.response.CalculatorResult;
-import com.example.MedicalCalculators.exceptions.ParameterException;
 import lombok.extern.log4j.Log4j2;
 
 import java.text.DecimalFormat;
@@ -19,18 +18,9 @@ public class CalculatorBodyMassIndex extends BaseCalculator<BMICalculatorRequest
         log.info("CalculatorBodyMassIndex has been created");
     }
 
-    // Расчет индекса массы тела
+    // Расчет индекса массы тела, результат в кг/м²
     @Override
     public CalculatorResult calculate(BMICalculatorRequest calculatorRequest) {
-        if (calculatorRequest.getHeight() <= 0 | calculatorRequest.getHeight() > 300) {
-            log.warn("Exception will be thrown on method: calculate");
-            throw new ParameterException("Incorrect value for height");
-        }
-
-        if (calculatorRequest.getWeightPatient() < 10) {
-            log.warn("Exception will be thrown on method: calculate");
-            throw new ParameterException("Incorrect value for weight");
-        }
         double bmi = calculatorRequest.getWeightPatient() /
                 Math.pow(calculatorRequest.getHeight() / 100, 2);
         log.debug("The result was obtained using a BMI calculator: " + bmi);
