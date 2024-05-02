@@ -1,0 +1,32 @@
+[
+    {
+        "nickname": "MrJones",
+        "email": "mr.jones@example.com",
+        "reputation": 50
+    },
+    {
+        "nickname": "JaneDoe",
+        "email": "jane.doe@example.com",
+        "reputation": 20
+    },
+    {
+        "nickname": "PeterGriffin",
+        "email": "peter.griffin@example.com",
+        "reputation": 25
+    },
+    {
+        "nickname": "HomerSimpson",
+        "email": "homer.simpson@example.com",
+        "reputation": 100
+    },
+    {
+        "nickname": "MrSmith",
+        "email": "mr.smith@example.com",
+        "reputation": 75
+    },
+    {
+        "nickname": "MrHater",
+        "email": "mr.hater@example.com",
+        "reputation": -20
+    }
+]
