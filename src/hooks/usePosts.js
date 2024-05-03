@@ -6,7 +6,8 @@ export const usePosts = () => {
 
   onMounted(() => {
     posts.value = postsList
+    // console.log(postsList, "postsList")
   })
-
+  console.log(posts, "usePosts")
   return posts
 }
