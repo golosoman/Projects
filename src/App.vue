@@ -15,11 +15,9 @@
 </script>
 
 <template>
-  <template>
-    <div class="app">
-      <router-view></router-view>
-    </div>
-  </template>
+  <div class="content">
+    <router-view />
+  </div>
 </template>
 
 <style scoped></style>
