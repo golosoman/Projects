@@ -8,13 +8,18 @@ export default {
   },
   setup() {
     const posts = usePosts()
-    return posts
+    console.log(posts, "PostPage");
+    return {posts}
   }
 }
 </script>
+
 <template>
-  <div class="content">
-    <PostList :post-list="posts" />
+  <div class="post-list-content">
+    <post-list
+      :postList="posts"
+    />
+    <!-- <PostList :post-list="posts" /> -->
   </div>
 </template>
 

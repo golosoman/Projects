@@ -8,6 +8,7 @@ const props = defineProps({
     require: true
   }
 })
+console.log(props.postList, "PostList")
 </script>
 
 <template>
