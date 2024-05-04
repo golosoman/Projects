@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { CreateCommentDto } from "./dto/create-comment.dto";
 import { PostDto } from "./dto/post.dto";
 import { Post } from "./post.model";
-import { CreatePostDto } from "./dto/create-post.dto";
 import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()

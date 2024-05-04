@@ -1,4 +1,4 @@
-import { Table, DataType, Model, Column, HasMany, ForeignKey } from "sequelize-typescript";
+import { Table, DataType, Model, Column, HasMany, ForeignKey, CreatedAt } from "sequelize-typescript";
 import { Comment } from "../comment/comment.model";
 
 interface PostCreationAttrs{
@@ -19,11 +19,12 @@ export class Post extends Model<Post, PostCreationAttrs>{
     @Column ({type: DataType.STRING, allowNull: false})
     content: string;
 
-    @Column ({type: DataType.DATE, allowNull: false})
-    published_at: Date;
-
     @Column ({type: DataType.BOOLEAN, allowNull: false})
     status: boolean;
+
+    @CreatedAt
+    @Column
+    published_at: Date;
 
     @ForeignKey(() => Comment)
     @Column ({type: DataType.INTEGER,  allowNull: true})
