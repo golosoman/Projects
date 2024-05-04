@@ -1,4 +1,4 @@
-import { Table, DataType, Model, Column, HasMany, ForeignKey } from "sequelize-typescript";
+import { Table, DataType, Model, Column, HasMany, ForeignKey, CreatedAt } from "sequelize-typescript";
 import { User } from "src/user/user.model";
 import { Post } from "src/post/post.model";
 
@@ -16,7 +16,8 @@ export class Comment extends Model<Comment, CommentCreationAttrs>{
     @Column ({type: DataType.STRING, allowNull: false})
     message: string;
 
-    @Column ({type: DataType.DATE, allowNull: false})
+    @CreatedAt
+    @Column
     published_at: Date;
 
     @ForeignKey(() => User)

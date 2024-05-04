@@ -23,5 +23,4 @@ export class User extends Model<User, UserCreationAttrs>{
 
     @HasMany(() => Comment)
     posts: Comment[];
-
 }

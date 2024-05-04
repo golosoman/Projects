@@ -4,6 +4,7 @@ import { ConfigModule } from "@nestjs/config";
 import { Post } from "./post/post.model";
 import { Comment } from "./comment/comment.model";
 import { User } from "./user/user.model";
+import { PostModule } from "./post/post.module";
 
 @Module({
     controllers: [],
@@ -22,6 +23,7 @@ import { User } from "./user/user.model";
             models: [Post, Comment, User],
             autoLoadModels: true,
         }),
+        PostModule
     ]
 })
 export class AppModule {
