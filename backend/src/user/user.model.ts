@@ -18,9 +18,12 @@ export class User extends Model<User, UserCreationAttrs>{
     @Column ({type: DataType.STRING, unique: true, allowNull: false})
     email: string;
 
-    @Column ({type: DataType.INTEGER, allowNull: false})
-    reputation: Date;
+    @Column({type: DataType.STRING, allowNull: false})
+    password: string;
+
+    @Column ({type: DataType.INTEGER, allowNull: false, defaultValue: 0})
+    reputation: number;
 
     @HasMany(() => Comment)
-    posts: Comment[];
+    comments: Comment[];
 }
