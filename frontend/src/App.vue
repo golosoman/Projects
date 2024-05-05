@@ -1,4 +1,12 @@
-<script setup>
+<script>
+import Navbar from "@/components/Navbar.vue";
+
+export default{
+  components: {
+    Navbar
+  }
+}
+
 // import { onMounted, ref } from 'vue'
 // import PostList from './components/PostList.vue'
 
@@ -16,6 +24,7 @@
 
 <template>
   <div class="content">
+    <navbar></navbar>
     <router-view />
   </div>
 </template>
