@@ -12,9 +12,9 @@ console.log(props.postList, "PostList")
 </script>
 
 <template>
-  <div class="posts_content" v-for="(post, index) in props.postList" :key="index">
-    <Post :post="post" />
-  </div>
+    <div class="posts_content p-3" v-for="(post, index) in props.postList" :key="index">
+      <Post :post="post" />
+    </div>
 </template>
 
 <style scoped></style>
