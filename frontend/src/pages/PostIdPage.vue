@@ -1,11 +1,21 @@
 <template>
-  <div>
-    <h1>Это страница поста с ID = {{ $route.params.id }}</h1>
+  <div class="content">
+    <post :post="post"></post>
   </div>
 </template>
 
 <script>
-export default {}
+import Post from '@/components/Post.vue'
+import { usePostById } from '@/hooks/post/usePostById';
+export default {
+  components: {
+    Post
+  },
+  setup() {
+    const post = usePostById()
+    return { post }
+  }
+}
 </script>
 
 <style scoped></style>
