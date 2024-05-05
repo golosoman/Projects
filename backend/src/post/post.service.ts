@@ -3,6 +3,7 @@ import { PostDto } from "./dto/post.dto";
 import { Post } from "./post.model";
 import { CreatePostDto } from "./dto/create-post.dto";
 import { InjectModel } from "@nestjs/sequelize";
+import { HttpException, HttpStatus } from '@nestjs/common'
 
 @Injectable()
 export class PostService {
@@ -14,13 +15,37 @@ export class PostService {
     }
 
     async getOnePost(id: number): Promise<PostDto> {
-        const post = await this.postRepository.findByPk(id);
-        return post;
+        try {
+            const post = await this.postRepository.findByPk(id);
+            if (!post){
+                throw new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    error: "Пост не найден",
+                    time: Date.now()
+                }, HttpStatus.NOT_FOUND)
+            }
+            return post;
+        } catch (error) {
+            throw new HttpException({
+                status: HttpStatus.INTERNAL_SERVER_ERROR,
+                error: "Внутренняя ошибка сервера",
+                time: Date.now()
+            }, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
     }
 
     async getAllPosts(): Promise<PostDto[]> {
-        const posts = await this.postRepository.findAll();
-        return posts;
+        try {
+            const posts = await this.postRepository.findAll();
+            return posts;
+        } catch (error) {
+            throw new HttpException({
+                status: HttpStatus.INTERNAL_SERVER_ERROR,
+                error: "Внутренняя ошибка сервера",
+                time: Date.now()
+            }, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        
     }
 
     async updatePost(id: number, dto: CreatePostDto): Promise<boolean>{
