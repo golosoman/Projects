@@ -16,13 +16,13 @@ export class Comment extends Model<Comment, CommentCreationAttrs>{
     @Column ({type: DataType.STRING, allowNull: false})
     message: string;
 
-    @CreatedAt
-    @Column
-    published_at: Date;
-
     @ForeignKey(() => User)
     @Column ({type: DataType.INTEGER, allowNull: false})
     author_id: number;
+
+    @CreatedAt
+    @Column
+    published_at: Date;
 
     @HasMany(() => Post)
     posts: Post[];
