@@ -1,6 +1,6 @@
 <script>
 import PostList from '@/components/PostList.vue'
-import { usePosts } from '@/hooks/usePosts.js'
+import { usePosts } from '@/hooks/post/usePosts.js'
 
 export default {
   components: {
@@ -15,11 +15,13 @@ export default {
 </script>
 
 <template>
-  <div class="post-list-content">
-    <post-list
-      :postList="posts"
-    />
-    <!-- <PostList :post-list="posts" /> -->
+  <div class="content row d-flex justify-content-center">
+    <div class="content w-75">
+      <post-list
+        :postList="posts"
+      />
+      <!-- <PostList :post-list="posts" /> -->
+    </div>
   </div>
 </template>
 
