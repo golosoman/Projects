@@ -1,45 +1,45 @@
 import { Injectable } from "@nestjs/common";
 import { CreateCommentDto } from "./dto/create-comment.dto";
-import { PostDto } from "./dto/post.dto";
-import { Post } from "./post.model";
+import { CommentDto } from "./dto/comment.dto";
+import { Comment } from "./comment.model";
 import { InjectModel } from "@nestjs/sequelize";
 
 @Injectable()
-export class PostService {
-    constructor(@InjectModel(Post) private postRepository: typeof Post) {}
+export class CommentService {
+    constructor(@InjectModel(Comment) private commentRepository: typeof Comment) {}
 
-    async create(dto: CreatePostDto) {
-        const post = await this.postRepository.create(dto);
-        return post;
+    async create(dto: CreateCommentDto) {
+        const comment = await this.commentRepository.create(dto);
+        return comment;
     }
 
-    async getOnePost(id: number): Promise<PostDto> {
-        const post = await this.postRepository.findByPk(id);
-        return post;
+    async getOneComment(id: number): Promise<CommentDto> {
+        const comment = await this.commentRepository.findByPk(id);
+        return comment;
     }
 
-    async getAllPosts(): Promise<PostDto[]> {
-        const posts = await this.postRepository.findAll();
-        return posts;
+    async getAllComments(): Promise<CommentDto[]> {
+        const comments = await this.commentRepository.findAll();
+        return comments;
     }
 
-    async updatePost(id: number, dto: CreatePostDto): Promise<boolean>{
-        const post = await this.postRepository.update(dto, {
+    async updateComment(id: number, dto: CreateCommentDto): Promise<boolean>{
+        const comment = await this.commentRepository.update(dto, {
             where: {
                 id: id,
             },
         });
-        console.log(post);
+        console.log(comment);
         return true;
     }
 
-    async deletePost(id: number): Promise<boolean>{
-        const post = await this.postRepository.destroy({
+    async deleteComment(id: number): Promise<boolean>{
+        const comment = await this.commentRepository.destroy({
             where: {
                 id: id,
             }
         })
-        console.log(post);
+        console.log(comment);
         return true;
     }
 }

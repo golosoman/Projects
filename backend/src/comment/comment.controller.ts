@@ -9,43 +9,43 @@ import {
     Patch,
     Delete,
 } from "@nestjs/common";
-import { PostService } from "./post.service";
-import { PostDto } from "./dto/post.dto";
-import { CreatePostDto } from "./dto/create-post.dto";
+import { CommentService } from "./comment.service";
+import { CommentDto } from "./dto/comment.dto";
+import { CreateCommentDto } from "./dto/create-comment.dto";
 
-@Controller("posts")
-export class PostController {
-    constructor(private postService: PostService) {}
+@Controller("comments")
+export class CommentController {
+    constructor(private commentService: CommentService) {}
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    async create(@Body() createPostDto: CreatePostDto) {
-        // console.log(createPostDto);
-        return this.postService.create(createPostDto);
+    async create(@Body() createCommentDto: CreateCommentDto) {
+        // console.log(createCommentDto);
+        return this.commentService.create(createCommentDto);
     }
 
     @Get(":id")
     @HttpCode(HttpStatus.OK)
-    async getOne(@Param("id") id: number): Promise<PostDto> {
-        return this.postService.getOnePost(id);
+    async getOne(@Param("id") id: number): Promise<CommentDto> {
+        return this.commentService.getOneComment(id);
     }
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    async getAll(): Promise<PostDto[]> {
+    async getAll(): Promise<CommentDto[]> {
       // console.log(123)
-        return this.postService.getAllPosts();
+        return this.commentService.getAllComments();
     }
 
     @Patch(":id")
     @HttpCode(HttpStatus.OK)
-    async update(@Param("id") id: number, @Body() updatePostDto: CreatePostDto): Promise<boolean> {
-      return this.postService.updatePost(id, updatePostDto)
+    async update(@Param("id") id: number, @Body() updateCommentDto: CreateCommentDto): Promise<boolean> {
+      return this.commentService.updateComment(id, updateCommentDto)
     }
 
     @Delete(":id")
     @HttpCode(HttpStatus.OK)
     async delete(@Param("id") id: number): Promise<boolean> {
-      return this.postService.deletePost(id)
+      return this.commentService.deleteComment(id)
     }
 }
