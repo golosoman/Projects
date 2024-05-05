@@ -5,6 +5,8 @@ import { Post } from "./post/post.model";
 import { Comment } from "./comment/comment.model";
 import { User } from "./user/user.model";
 import { PostModule } from "./post/post.module";
+import { UserModule } from "./user/user.module";
+import { CommentModule } from "./comment/comment.module";
 
 @Module({
     controllers: [],
@@ -23,7 +25,9 @@ import { PostModule } from "./post/post.module";
             models: [Post, Comment, User],
             autoLoadModels: true,
         }),
-        PostModule
+        PostModule,
+        UserModule,
+        CommentModule
     ]
 })
 export class AppModule {
