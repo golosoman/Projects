@@ -1,10 +1,12 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
+// import Loader from "@/components/Loader.vue";
 
 export default{
   components: {
-    Navbar
-  }
+    Navbar,
+    // Loader
+  },
 }
 
 // import { onMounted, ref } from 'vue'
@@ -26,7 +28,9 @@ export default{
   <div class="content">
     <navbar></navbar>
     <router-view />
+    <!-- <loader></loader> -->
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
