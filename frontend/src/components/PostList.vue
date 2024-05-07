@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
-import Post from '@/components/Post.vue'
+import PostCard from '@/components/PostCard.vue'
 
 const props = defineProps({
   postList: {
@@ -13,7 +13,7 @@ console.log(props.postList, "PostList")
 
 <template>
     <div class="posts_content p-3" v-for="(post, index) in props.postList" :key="index">
-      <Post :post="post" />
+      <PostCard :post="post" />
     </div>
 </template>
 
