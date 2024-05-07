@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="menu">
         <div id="menuHolder" :class="menuHolderClass">
@@ -13,11 +14,16 @@
                 <div class="flex2 text-end d-block d-md-none">
                     <button class="whiteLink siteLink"><i class="fas fa-search"></i></button>
                 </div>
-            
-                <div class="flex2 text-end d-none d-md-block">
-                    <button @click="$router.push('/register')" class="whiteLink siteLink">Зарегестрироваться</button>
-                    <button @click="$router.push('/authorization')" class="blackLink siteLink">Войти</button>
+                
+                <div  v-if="isLoggedIn" class="flex2 text-end d-none d-md-block">
+                    <button @click="logout" class="btn btn-danger">Выйти из аккаунта</button>
                 </div>
+
+                <div  v-else class="flex2 text-end d-none d-md-block">
+                    <button @click="$router.push('/register')" class="whiteLink siteLink">Зарегестрироваться</button>
+                    <button @click="$router.push('/login')" class="blackLink siteLink">Войти</button>
+                </div>
+
                 </div>
             </div>
             
@@ -33,9 +39,8 @@
                 </div>
                 </div>
                 <div>
-                <a @click="$router.push('/')" class="nav-menu-item"><i class="fas fa-home me-3"></i>Главная</a>
-                <a @click="$router.push('/posts')" class="nav-menu-item"><i class="fab fa-product-hunt me-3"></i>Мои посты</a>
                 <a @click="$router.push('/lk')" class="nav-menu-item"><i class="fas fa-search me-3"></i>Личный кабинет</a>
+                <a @click="$router.push('/')" class="nav-menu-item"><i class="fas fa-home me-3"></i>Посты</a>
                 </div>
             </div>
         </div>
@@ -52,7 +57,18 @@
                 else menuHolderClass.value = "drawMenu"
             }
             return {menuHolderClass, menuToggle}
-        }
+        },
+        computed : {
+          isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+        },
+        methods: {
+          logout: function () {
+            this.$store.dispatch('logout')
+            .then(() => {
+              this.$router.push('/login')
+        })
+      }
+    },
     }
 </script>
 
