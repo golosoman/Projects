@@ -23,6 +23,11 @@ export class CommentService {
         return comments;
     }
 
+    async getAllCommentsByPostId(): Promise<CommentDto[]> {
+        const comments = await this.commentRepository.findAll();
+        return comments;
+    }
+
     async updateComment(id: number, dto: CreateCommentDto): Promise<boolean>{
         const comment = await this.commentRepository.update(dto, {
             where: {

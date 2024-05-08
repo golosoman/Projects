@@ -1,5 +1,5 @@
-import { Table, DataType, Model, Column, HasMany, ForeignKey, CreatedAt } from "sequelize-typescript";
-import { User } from "src/user/user.model";
+import { Table, DataType, Model, Column, HasMany, ForeignKey, CreatedAt, BelongsTo } from "sequelize-typescript";
+import { User } from "src/users/users.model";
 import { Post } from "src/post/post.model";
 
 interface CommentCreationAttrs{
@@ -16,14 +16,21 @@ export class Comment extends Model<Comment, CommentCreationAttrs>{
     @Column ({type: DataType.STRING, allowNull: false})
     message: string;
 
-    @ForeignKey(() => User)
-    @Column ({type: DataType.INTEGER, allowNull: false})
-    author_id: number;
-
     @CreatedAt
     @Column
     published_at: Date;
 
-    @HasMany(() => Post)
-    posts: Post[];
+    @ForeignKey(() => User)
+    @Column ({type: DataType.INTEGER, allowNull: false})
+    author_id: number;
+
+    @BelongsTo(() => User)
+    author: User
+
+    @ForeignKey(() => Post)
+    @Column ({type: DataType.INTEGER,  allowNull: true})
+    posts_id: number;
+
+    @BelongsTo(() => Post)
+    post: Post
 }
