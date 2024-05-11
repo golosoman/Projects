@@ -27,7 +27,7 @@ public class CalculatorTitrations extends BaseCalculator<TitrationCalculatorRequ
                         пациента (кг) * доза препарата (мкг/кг*мин) / (количество препарата в инфузионном 
                         растворе (мг) * (1 000/общий объем инфузионного раствора))*60
                         """);
-        log.info("CalculatorRateIntravenousDripDrug has been created");
+        log.info("Создан калькулятор титрования");
     }
 
     // Расчет скорости инфузии препарата через линеомат (скорость титрования),
@@ -42,7 +42,7 @@ public class CalculatorTitrations extends BaseCalculator<TitrationCalculatorRequ
         double infusionRate = calculatorRequest.getWeightPatient() * dosage /
                 (calculatorRequest.getAmountOfDrug() * (1000 /
                         calculatorRequest.getVolumeOfSolution())) * 60;
-        log.debug("The result was obtained using a BMI calculator: " + infusionRate);
+        log.debug("Результат был получен с помощью калькулятора титрования: " + infusionRate);
         return new CalculatorResult((new DecimalFormat("#.###")).format(infusionRate));
     }
 }

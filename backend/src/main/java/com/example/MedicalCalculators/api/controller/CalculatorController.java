@@ -39,7 +39,7 @@ public class CalculatorController {
 
     public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
-        log.info("CalculatorController has been created");
+        log.info("Создан контроллер калькулятора");
     }
 
     @Operation(
@@ -59,7 +59,7 @@ public class CalculatorController {
                     )}
             ),
             @ApiResponse(responseCode = "404",
-                    description = "Калькулятор не был найден по его названию name",
+                    description = "Калькулятор не был найден по его идентификатору id",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorMessage.class),
                             examples = @ExampleObject(value =
@@ -67,8 +67,8 @@ public class CalculatorController {
                                             {
                                               "statusCode": 404,
                                               "timestamp": "2024-04-22T17:01:56.160+04:00",
-                                              "message": "Calculator with ID 5 not found",
-                                              "description": "Resolved [сom.example.MedicalCalculators.exceptions.controller.NotFoundException: Calculator with ID 5 not found]"
+                                              "message": "Калькулятор с идентификатором 5 не найден",
+                                              "description": "Resolved [сom.example.MedicalCalculators.exceptions.controller.NotFoundException: Калькулятор с идентификатором 5 не найден]"
                                             }
                                             """
                             )
@@ -79,7 +79,7 @@ public class CalculatorController {
     @ResponseBody
     public CalculatorInfoFull get(@PathVariable(name = "id")
                                   @Parameter(description = "Идентификатор калькулятора") Long id) {
-        log.info("Request GET to the address: /calculator/" + id);
+        log.info("Запрос GET по адресу: /calculator/" + id);
         return calculatorService.getOne(id);
     }
 
@@ -103,7 +103,7 @@ public class CalculatorController {
     @GetMapping
     @ResponseBody
     public List<CalculatorInfoFull> getAll() {
-        log.info("Request GET to the address: /calculator");
+        log.info("Запрос GET по адресу: /calculator");
         return calculatorService.getAll();
     }
 
@@ -131,8 +131,8 @@ public class CalculatorController {
                                             {
                                               "statusCode": 404,
                                               "timestamp": "2024-04-22T17:01:56.160+04:00",
-                                              "message": "Calculator with ID 5 not found",
-                                              "description": "Resolved [com.example.MedicalCalculators.exceptions.controller.NotFoundException: Calculator with ID 5 not found]"
+                                              "message": "Калькулятор с названием name не найден",
+                                              "description": "Resolved [com.example.MedicalCalculators.exceptions.controller.NotFoundException: Калькулятор с названием name не найден]"
                                             }
                                             """
                             )
@@ -143,7 +143,7 @@ public class CalculatorController {
     @ResponseBody
     public CalculatorInfo getInfo(@PathVariable(name = "name")
                                   @Parameter(description = "Название калькулятора") String name) {
-        log.info("Request GET to the address: /calculator/" + name + "/info");
+        log.info("Запрос GET по адресу: /calculator/" + name + "/info");
         return calculatorService.getInfo(name);
     }
 
@@ -175,11 +175,11 @@ public class CalculatorController {
                                               "timestamp": "2024-04-26T13:11:44.329+00:00",
                                               "violations": [
                                                 {
-                                                  "fieldName": "The minimum weight value is 10 kg",
+                                                  "fieldName": "Минимальный вес составляет 10 кг",
                                                   "message": "getBMIResult.calculatorRequest.weightPatient"
                                                 },
                                                 {
-                                                  "fieldName": "The height cannot exceed 300 cm",
+                                                  "fieldName": "Рост не должен превышать 300 см",
                                                   "message": "getBMIResult.calculatorRequest.height"
                                                 }
                                               ]
@@ -192,7 +192,7 @@ public class CalculatorController {
     @PostMapping("/body-mass-index/result")
     @ResponseBody
     public CalculatorResult BMIResult(@RequestBody BMICalculatorRequest calculatorRequest) {
-        log.info("Request POST to the address: /body-mass-index/result");
+        log.info("Запрос POST по адресу: /body-mass-index/result");
         return calculatorService.getBMIResult(calculatorRequest);
     }
 
@@ -229,27 +229,27 @@ public class CalculatorController {
                             examples = @ExampleObject(value =
                                     """
                                             {
-                                              "statusCode": 400,
-                                              "timestamp": "2024-04-26T14:25:46.311+00:00",
-                                              "violations": [
-                                                {
-                                                  "fieldName": "getTitrationResult.calculatorRequest.dosage",
-                                                  "message": "The dosage value of the drug is strictly positive"
-                                                },
-                                                {
-                                                  "fieldName": "getTitrationResult.calculatorRequest.amountOfDrug",
-                                                  "message": "The value of the amount of the drug is strictly positive"
-                                                },
-                                                {
-                                                  "fieldName": "getTitrationResult.calculatorRequest.weightPatient",
-                                                  "message": "The weight value is strictly positive"
-                                                },
-                                                {
-                                                  "fieldName": "getTitrationResult.calculatorRequest.volumeOfSolution",
-                                                  "message": "The value of the total volume of the solution is strictly positive"
-                                                }
-                                              ]
-                                            }
+                                               "statusCode": 400,
+                                               "timestamp": "2024-04-26T14:25:46.311+00:00",
+                                               "violations": [
+                                                 {
+                                                   "fieldName": "getTitrationResult.calculatorRequest.dosage",
+                                                   "message": "Дозировка препарата строго положительная"
+                                                 },
+                                                 {
+                                                   "fieldName": "getTitrationResult.calculatorRequest.amountOfDrug",
+                                                   "message": "Значение количества препарата является строго положительным"
+                                                 },
+                                                 {
+                                                   "fieldName": "getTitrationResult.calculatorRequest.weightPatient",
+                                                   "message": "Значение веса строго положительное"
+                                                 },
+                                                 {
+                                                   "fieldName": "getTitrationResult.calculatorRequest.volumeOfSolution",
+                                                   "message": "Значение общего объема раствора является строго положительным"
+                                                 }
+                                               ]
+                                             }
                                             """
                             )
                     )}
@@ -258,7 +258,7 @@ public class CalculatorController {
     @PostMapping("/titration-rate/result")
     @ResponseBody
     public CalculatorResult TitrationResult(@RequestBody TitrationCalculatorRequest calculatorRequest) {
-        log.info("Request POST to the address: /titration-rate/result");
+        log.info("Запрос POST по адресу: /titration-rate/result");
         return calculatorService.getTitrationResult(calculatorRequest);
     }
 
@@ -300,11 +300,11 @@ public class CalculatorController {
                                               "violations": [
                                                 {
                                                   "fieldName": "getRIDDResult.calculatorRequest.volumeOfSolution",
-                                                  "message": "The value of the solution volume is strictly positive"
+                                                  "message": "Значение объема раствора строго положительное"
                                                 },
                                                 {
                                                   "fieldName": "getRIDDResult.calculatorRequest.timeTaking",
-                                                  "message": "The value of the desired drug administration time is strictly positive"
+                                                  "message": "Значение желаемого времени введения препарата является строго положительным"
                                                 }
                                               ]
                                             }
@@ -316,7 +316,7 @@ public class CalculatorController {
     @PostMapping("/rate-intravenous-drip-drug/result")
     @ResponseBody
     public CalculatorResult TitrationResult(@RequestBody RIDDCalculatorRequest calculatorRequest) {
-        log.info("Request POST to the address: /rate-intravenous-drip-drug/result");
+        log.info("Запрос POST по адресу: /rate-intravenous-drip-drug/result");
         return calculatorService.getRIDDResult(calculatorRequest);
     }
 }

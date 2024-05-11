@@ -16,7 +16,7 @@ public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalcul
                         t - время в минутах, 20 - среднее количество капель в милилитре, 
                         v - скорость введения в каплях в минуту
                         """);
-        log.info("CalculatorRateIntravenousDripDrug has been created");
+        log.info("Создан калькулятор скорости внутривенного капельного введения препарата");
     }
 
     // Расчет скорости внутривенного капельного введения препарата, результат в каплях в минуту
@@ -26,7 +26,7 @@ public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalcul
             time *= 60;
         }
         double ridd = calculatorRequest.getVolumeOfSolution() * 20 / time;
-        log.debug("The result was obtained using a BMI calculator: " + ridd);
+        log.debug("Результат был получен с помощью калькулятора внутривенного введения препарата: " + ridd);
         return new CalculatorResult((new DecimalFormat("#.###")).format(ridd));
     }
 }

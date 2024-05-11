@@ -17,7 +17,7 @@ public class CalculatorBodyMassIndex extends BaseCalculator<BMICalculatorRequest
                         вес не менее 10 кг.\nВозможен ввод дробных значений веса с точность до одного 
                         знака после запятой.
                         """);
-        log.info("CalculatorBodyMassIndex has been created");
+        log.info("Создан калькулятор индекса массы тела");
     }
 
     // Расчет индекса массы тела, результат в кг/м²
@@ -25,7 +25,7 @@ public class CalculatorBodyMassIndex extends BaseCalculator<BMICalculatorRequest
     public CalculatorResult calculate(BMICalculatorRequest calculatorRequest) {
         double bmi = calculatorRequest.getWeightPatient() /
                 Math.pow(calculatorRequest.getHeight() / 100, 2);
-        log.debug("The result was obtained using a BMI calculator: " + bmi);
+        log.debug("Результат был получен с помощью калькулятора ИМТ: " + bmi);
         return new CalculatorResult((new DecimalFormat("#.###")).format(bmi));
     }
 }
