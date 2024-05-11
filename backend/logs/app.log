@@ -1,0 +1,214 @@
+2024-05-11 18:30:16,979 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:30:17,083 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:30:17,091 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:30:23,001 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:30:23,007 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:30:23,009 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:30:23,009 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:30:23,075 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:30:24,561 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 8.845 seconds (process running for 12.478)
+2024-05-11 18:32:45,061 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:32:45,062 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:32:45,063 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:32:45,942 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:32:45,944 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:32:45,946 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:32:45,946 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:32:46,331 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.417 seconds (process running for 154.249)
+2024-05-11 18:32:54,143 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:32:54,144 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:32:54,144 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:32:55,062 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:32:55,064 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:32:55,066 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:32:55,066 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:32:55,080 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:32:55,459 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.437 seconds (process running for 163.376)
+2024-05-11 18:35:51,429 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:35:51,430 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:35:51,430 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:35:52,244 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:35:52,246 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:35:52,248 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:35:52,248 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:35:52,611 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.306 seconds (process running for 340.528)
+2024-05-11 18:36:01,512 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:36:01,513 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:36:01,514 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:36:02,331 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:36:02,333 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:36:02,334 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:36:02,335 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:36:02,345 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:36:02,695 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.315 seconds (process running for 350.612)
+2024-05-11 18:38:24,367 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:38:24,368 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:38:24,368 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:38:25,124 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:38:25,126 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:38:25,128 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:38:25,128 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:38:25,468 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.223 seconds (process running for 493.385)
+2024-05-11 18:38:34,287 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:38:34,288 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:38:34,289 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:38:35,087 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:38:35,089 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:38:35,091 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:38:35,091 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:38:35,100 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:38:35,476 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.295 seconds (process running for 503.393)
+2024-05-11 18:39:26,444 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:39:26,445 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:39:26,445 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:39:27,513 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:39:27,516 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:39:27,517 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:39:27,518 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:39:27,873 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.547 seconds (process running for 555.79)
+2024-05-11 18:39:36,829 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:39:36,829 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:39:36,830 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:39:37,611 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:39:37,612 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:39:37,614 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:39:37,614 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:39:37,623 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:39:37,964 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.291 seconds (process running for 565.882)
+2024-05-11 18:41:19,812 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:41:19,813 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:41:19,814 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:41:20,664 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:41:20,665 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:41:20,667 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:41:20,667 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:41:21,002 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.311 seconds (process running for 668.919)
+2024-05-11 18:41:28,783 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:41:28,784 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:41:28,784 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:41:29,612 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:41:29,614 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:41:29,616 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:41:29,616 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:41:29,625 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:41:29,974 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.293 seconds (process running for 677.891)
+2024-05-11 18:42:10,859 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:42:10,860 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:42:10,860 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:42:11,620 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:42:11,622 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:11,624 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:11,624 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:42:11,990 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.235 seconds (process running for 719.907)
+2024-05-11 18:42:18,758 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:42:18,759 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:42:18,759 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:42:19,559 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:42:19,561 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:19,562 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:19,562 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:42:19,571 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:42:19,925 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.269 seconds (process running for 727.842)
+2024-05-11 18:42:49,408 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:42:49,409 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:42:49,409 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:42:50,182 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:42:50,184 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:50,185 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:50,185 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:42:50,509 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.201 seconds (process running for 758.426)
+2024-05-11 18:42:58,280 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:42:58,281 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:42:58,282 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:42:59,115 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:42:59,117 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:59,119 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:42:59,119 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:42:59,128 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:42:59,627 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.441 seconds (process running for 767.544)
+2024-05-11 18:43:29,006 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:43:29,007 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:43:29,007 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:43:29,737 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:43:29,739 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:43:29,740 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:43:29,741 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:43:30,070 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.171 seconds (process running for 797.988)
+2024-05-11 18:43:37,862 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:43:37,863 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:43:37,863 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:43:38,679 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:43:38,681 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:43:38,683 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:43:38,683 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:43:38,698 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:43:39,064 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.347 seconds (process running for 806.982)
+2024-05-11 18:44:15,035 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:44:15,036 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:44:15,036 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:44:15,899 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:44:15,900 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:44:15,903 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:44:15,903 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:44:16,207 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.275 seconds (process running for 844.124)
+2024-05-11 18:44:24,024 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:44:24,025 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:44:24,025 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:44:24,875 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:44:24,877 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:44:24,878 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:44:24,878 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:44:24,892 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:44:25,201 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.282 seconds (process running for 853.118)
+2024-05-11 18:47:16,462 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:47:16,463 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:47:16,463 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:47:17,409 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:47:17,411 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:47:17,412 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:47:17,413 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:47:17,883 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.567 seconds (process running for 1025.8)
+2024-05-11 18:47:27,746 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 18:47:27,747 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 18:47:27,747 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 18:47:28,505 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 18:47:28,506 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:47:28,508 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 18:47:28,508 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 18:47:28,523 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 18:47:28,861 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.227 seconds (process running for 1036.778)
+2024-05-11 19:00:03,786 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 19:00:03,786 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 19:00:03,787 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 19:00:04,713 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 19:00:04,715 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:00:04,718 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:00:04,718 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 19:00:05,184 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.532 seconds (process running for 1793.101)
+2024-05-11 19:00:12,974 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 19:00:12,975 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 19:00:12,975 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 19:00:13,745 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 19:00:13,747 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:00:13,753 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:00:13,753 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 19:00:13,762 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 19:00:14,109 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.23 seconds (process running for 1802.025)
+2024-05-11 19:08:32,177 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 19:08:32,178 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 19:08:32,178 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 19:08:33,029 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 19:08:33,030 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:08:33,033 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:08:33,034 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 19:08:33,045 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 19:08:33,490 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.439 seconds (process running for 2301.407)
+2024-05-11 19:08:40,256 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Starting MedicalCalculatorsApplication using Java 22 with PID 6060 (E:\Программирование\пркатика_галактика\MedicalCalculators\target\classes started by Golosoman in E:\Программирование\пркатика_галактика\MedicalCalculators)
+2024-05-11 19:08:40,257 DEBUG c.e.M.MedicalCalculatorsApplication [restartedMain] Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-11 19:08:40,258 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-05-11 19:08:41,039 INFO c.e.M.s.C.t.CalculatorBodyMassIndex [restartedMain] CalculatorBodyMassIndex has been created
+2024-05-11 19:08:41,041 INFO c.e.M.s.C.t.CalculatorRateIntravenousDripDrug [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:08:41,042 INFO c.e.M.s.C.t.CalculatorTitrations [restartedMain] CalculatorRateIntravenousDripDrug has been created
+2024-05-11 19:08:41,042 INFO c.e.M.s.C.CalculatorService [restartedMain] CalculatorService has been created
+2024-05-11 19:08:41,051 INFO c.e.M.a.c.CalculatorController [restartedMain] CalculatorController has been created
+2024-05-11 19:08:41,378 INFO c.e.M.MedicalCalculatorsApplication [restartedMain] Started MedicalCalculatorsApplication in 1.228 seconds (process running for 2309.295)
