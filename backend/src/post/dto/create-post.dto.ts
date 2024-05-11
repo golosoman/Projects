@@ -1,6 +1,9 @@
+import { IsString } from "class-validator";
+
 export class CreatePostDto {
-  title: string;
-  content: string;
-  status: boolean;
-  comments_id: number;
+    @IsString({ message: "Должно быть строкой" })
+    title: string;
+
+    @IsString({ message: "Должно быть строкой" })
+    content: string;
 }
