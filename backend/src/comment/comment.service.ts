@@ -3,6 +3,7 @@ import { CreateCommentDto } from "./dto/create-comment.dto";
 import { CommentDto } from "./dto/comment.dto";
 import { Comment } from "./comment.model";
 import { InjectModel } from "@nestjs/sequelize";
+import { User } from "src/users/users.model";
 
 @Injectable()
 export class CommentService {
@@ -13,8 +14,17 @@ export class CommentService {
         return comment;
     }
 
-    async getOneComment(id: number): Promise<CommentDto> {
-        const comment = await this.commentRepository.findByPk(id);
+    public async getOneComment(id: number): Promise<CommentDto> {
+        const comment = await this.commentRepository.findOne({
+            where: {id:id}, 
+            include: [{
+                model: User,
+                attributes: {
+                exclude: ["id", "password"],
+                },
+            }],
+            attributes: { exclude: ["author_id", "posts_id"]}
+        });
         return comment;
     }
 
