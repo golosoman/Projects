@@ -9,10 +9,13 @@ import java.text.DecimalFormat;
 @Log4j2
 public class CalculatorRateIntravenousDripDrug extends BaseCalculator<RIDDCalculatorRequest> {
     public CalculatorRateIntravenousDripDrug() {
-        super(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG, "*Расчет скорости внутривенного " +
-                "капельного введения препарата\nФормула: количество капель в " +
-                "минуту = V*20/t, где V - объем раствора в милилитрах, t - время в минутах, 20 - среднее " +
-                "количество капель в милилитре, v - скорость введения в каплях в минуту");
+        super(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG,
+                """
+                        *Расчет скорости внутривенного капельного введения препарата\nФормула: 
+                        количество капель в минуту = V*20/t, где V - объем раствора в милилитрах, 
+                        t - время в минутах, 20 - среднее количество капель в милилитре, 
+                        v - скорость введения в каплях в минуту
+                        """);
         log.info("CalculatorRateIntravenousDripDrug has been created");
     }
 
