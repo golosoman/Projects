@@ -14,11 +14,11 @@ import lombok.Setter;
 @Schema(description = "Объект, включающий параметры для калькулятора индекса массы тела")
 public class BMICalculatorRequest extends BaseCalculatorRequest {
     @Schema(description = "Вес человека в кг", example = "65")
-    @Min(value = 10, message = "The minimum weight value is 10 kg")
+    @Min(value = 10, message = "Минимальный вес составляет 10 кг")
     private Double weightPatient;
 
     @Schema(description = "Рост человека в см", example = "176")
-    @Positive(message = "The growth value is strictly positive")
-    @Max(value = 300, message = "The height cannot exceed 300 cm")
+    @Positive(message = "Значение роста является строго положительным")
+    @Max(value = 300, message = "Рост не должен превышать 300 см")
     private Double height;
 }

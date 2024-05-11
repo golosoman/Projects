@@ -13,7 +13,7 @@ public class Violation {
     private final String fieldName;
 
     @Schema(description = "Название ошибки",
-            example = "The minimum weight value is 10 kg")
+            example = "Минимальный вес составляет 10 кг")
     private final String message;
 
 }

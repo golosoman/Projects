@@ -27,74 +27,74 @@ public class CalculatorService {
         calculators.put(CalculatorType.BODY_MASS_INDEX, new CalculatorBodyMassIndex());
         calculators.put(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG, new CalculatorRateIntravenousDripDrug());
         calculators.put(CalculatorType.TITRATIONS, new CalculatorTitrations());
-        log.info("CalculatorService has been created");
+        log.info("Создан сервис калькулятора");
     }
 
     private CalculatorInfoFull findCalculatorById(Long id) {
         for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             if (entry.getKey().getId() == id) {
-                log.debug("The calculator was found using the method: findCalculatorById");
+                log.debug("Калькулятор был найден с помощью метода: findCalculatorById");
                 return entry.getValue().getInfoFull();
             }
         }
-        log.warn("Exception will be thrown on method: findCalculatorById");
-        throw new NotFoundException("Calculator with ID " + id + " not found");
+        log.warn("Для метода: findCalculatorById будет выдано исключение");
+        throw new NotFoundException("Калькулятор с идентификатором " + id + " не был найден");
     }
 
     private CalculatorInfo findCalculatorByName(String name) {
         for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             if (Objects.equals(entry.getKey().getName(), name)) {
-                log.debug("The calculator was found using the method: findCalculatorByName");
+                log.debug("Калькулятор был найден с помощью метода: findCalculatorByName");
                 return entry.getValue().getInfo();
             }
         }
-        log.warn("Exception will be thrown on method: findCalculatorByName");
-        throw new NotFoundException("Calculator with name " + name + " not found");
+        log.warn("Для метода: findCalculatorByName будет выдано исключени");
+        throw new NotFoundException("Калькулятор с названием " + name + " не был найден");
     }
 
-    public CalculatorInfoFull getOne(@Min(value = 0, message = "The ID must be at least 0") Long id) {
+    public CalculatorInfoFull getOne(@Min(value = 0, message = "Идентификатор должен быть не меньше 0") Long id) {
         CalculatorInfoFull calculatorInfoFull = findCalculatorById(id);
         if (calculatorInfoFull == null) {
-            log.warn("Exception will be thrown on method: getOne");
-            throw new NotFoundException("Calculator with ID " + id + " not found");
+            log.warn("Для метода: getOne будет выдано исключение");
+            throw new NotFoundException("Калькулятор с идентификатором " + id + " не был найден");
         }
-        log.debug("The calculator was found using the method: getOne");
+        log.debug("Калькулятор был найден с помощью метода: getOne");
         return calculatorInfoFull;
     }
 
     public List<CalculatorInfoFull> getAll() {
         List<CalculatorInfoFull> calculatorsInfo = new ArrayList<>();
         for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
-            log.debug("There is at least one calculator in calculators");
+            log.debug("В калькуляторах есть по крайней мере один калькулятор");
             calculatorsInfo.add(entry.getValue().getInfoFull());
         }
-        log.debug("Information about calculators has been returned");
+        log.debug("Информация о калькуляторах была возвращена");
         return calculatorsInfo;
     }
 
-    public CalculatorInfo getInfo(@NotBlank(message = "The name of the calculator cannot be empty") String name) {
+    public CalculatorInfo getInfo(@NotBlank(message = "Имя калькулятора не может быть пустым") String name) {
         CalculatorInfo calculatorInfoFull = findCalculatorByName(name);
         if (calculatorInfoFull == null) {
-            log.warn("Exception will be thrown on method: getInfo");
-            throw new NotFoundException("Calculator with name " + name + " not found");
+            log.warn("Для метода: getInfo будет выдано исключение");
+            throw new NotFoundException("Калькулятор с названием " + name + " не был найден");
         }
-        log.debug("The calculator was found using the method: getInfo");
+        log.debug("Калькулятор был найден с помощью метода: getInfo");
         return calculatorInfoFull;
 
     }
 
     public CalculatorResult getBMIResult(@Valid BMICalculatorRequest calculatorRequest) {
-        log.debug("Start method getBMIResult");
+        log.debug("Запущен метод getBMIResult");
         return calculators.get(CalculatorType.BODY_MASS_INDEX).calculate(calculatorRequest);
     }
 
     public CalculatorResult getTitrationResult(@Valid TitrationCalculatorRequest calculatorRequest) {
-        log.debug("Start method getTitrationResult");
+        log.debug("Запущен метод getTitrationResult");
         return calculators.get(CalculatorType.TITRATIONS).calculate(calculatorRequest);
     }
 
     public CalculatorResult getRIDDResult(@Valid RIDDCalculatorRequest calculatorRequest) {
-        log.debug("Start method getRIDDResult");
+        log.debug("Запущен метод getRIDDResult");
         return calculators.get(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG).calculate(calculatorRequest);
     }
 }
