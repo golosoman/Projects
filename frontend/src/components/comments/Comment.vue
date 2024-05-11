@@ -18,7 +18,7 @@ const props = defineProps({
 
             <div class="d-flex justify-content-between">
             <div class="d-flex flex-row align-items-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                <img src="https://i.livelib.ru/auface/1062661/o/ec53/Dmitrij_Lyubchenko.jpg" alt="avatar" width="25"
                 height="25" />
                 <p class="small mb-0 ms-2"><span>Пользователь: {{ props.comment.author.name }} ({{ props.comment.author.reputation }})</span></p>
             </div>
