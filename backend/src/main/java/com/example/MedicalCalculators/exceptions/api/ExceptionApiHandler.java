@@ -17,7 +17,7 @@ public class ExceptionApiHandler {
     public ErrorMessage notFoundException(NotFoundException exception, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.NOT_FOUND.value(),
-                new Date(),
+                exception.getTimestamp(), // Используйте timestamp из исключения
                 exception.getMessage(),
                 request.getDescription(false)
         );
@@ -30,7 +30,7 @@ public class ExceptionApiHandler {
     public ErrorMessage alreadyExistsException(AlreadyExistsException exception, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
                 HttpStatus.FORBIDDEN.value(),
-                new Date(),
+                exception.getTimestamp(), // Используйте timestamp из исключения
                 exception.getMessage(),
                 request.getDescription(false)
         );

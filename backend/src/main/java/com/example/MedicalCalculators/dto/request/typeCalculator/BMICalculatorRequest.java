@@ -1,12 +1,11 @@
 package com.example.MedicalCalculators.dto.request.typeCalculator;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Setter
 @Getter
@@ -14,11 +13,12 @@ import lombok.Setter;
 @Schema(description = "Объект, включающий параметры для калькулятора индекса массы тела")
 public class BMICalculatorRequest extends BaseCalculatorRequest {
     @Schema(description = "Вес человека в кг", example = "65")
-    @Min(value = 10, message = "Минимальный вес составляет 10 кг")
+    @Range(min = 10, max = 800, message = "'Вес' не должен быть меньше 10 кг и не должен превышать 800 кг")
+    @NotNull(message = "Параметр 'вес' пациента является обязательным")
     private Double weightPatient;
 
     @Schema(description = "Рост человека в см", example = "176")
-    @Positive(message = "Значение роста является строго положительным")
-    @Max(value = 300, message = "Рост не должен превышать 300 см")
+    @Range(min = 45, max = 300, message = "'Рост' должен быть больше 45 см и не должен превышать 300 см")
+    @NotNull(message = "Параметр 'рост' пациента является обязательным")
     private Double height;
 }

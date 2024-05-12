@@ -66,7 +66,7 @@ public class CalculatorController {
                                     """
                                             {
                                               "statusCode": 404,
-                                              "timestamp": "2024-04-22T17:01:56.160+04:00",
+                                              "timestamp": "11-05-2024 19:28:57",
                                               "message": "Калькулятор с идентификатором 5 не найден",
                                               "description": "Resolved [сom.example.MedicalCalculators.exceptions.controller.NotFoundException: Калькулятор с идентификатором 5 не найден]"
                                             }
@@ -130,7 +130,7 @@ public class CalculatorController {
                                     """
                                             {
                                               "statusCode": 404,
-                                              "timestamp": "2024-04-22T17:01:56.160+04:00",
+                                              "timestamp": "11-05-2024 19:28:57",
                                               "message": "Калькулятор с названием name не найден",
                                               "description": "Resolved [com.example.MedicalCalculators.exceptions.controller.NotFoundException: Калькулятор с названием name не найден]"
                                             }
@@ -172,7 +172,7 @@ public class CalculatorController {
                                     """
                                             {
                                               "statusCode": 400,
-                                              "timestamp": "2024-04-26T13:11:44.329+00:00",
+                                              "timestamp": "11-05-2024 19:28:57",
                                               "violations": [
                                                 {
                                                   "fieldName": "Минимальный вес составляет 10 кг",
@@ -230,7 +230,7 @@ public class CalculatorController {
                                     """
                                             {
                                                "statusCode": 400,
-                                               "timestamp": "2024-04-26T14:25:46.311+00:00",
+                                               "timestamp": "11-05-2024 19:28:57",
                                                "violations": [
                                                  {
                                                    "fieldName": "getTitrationResult.calculatorRequest.dosage",
@@ -296,7 +296,7 @@ public class CalculatorController {
                                     """
                                             {
                                               "statusCode": 400,
-                                              "timestamp": "2024-04-26T14:31:57.825+00:00",
+                                              "timestamp": "11-05-2024 19:28:57",
                                               "violations": [
                                                 {
                                                   "fieldName": "getRIDDResult.calculatorRequest.volumeOfSolution",

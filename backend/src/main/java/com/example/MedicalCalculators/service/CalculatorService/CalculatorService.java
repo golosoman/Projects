@@ -38,7 +38,7 @@ public class CalculatorService {
             }
         }
         log.warn("Для метода: findCalculatorById будет выдано исключение");
-        throw new NotFoundException("Калькулятор с идентификатором " + id + " не был найден");
+        throw new NotFoundException(new Date(), "Калькулятор с идентификатором " + id + " не был найден");
     }
 
     private CalculatorInfo findCalculatorByName(String name) {
@@ -49,14 +49,14 @@ public class CalculatorService {
             }
         }
         log.warn("Для метода: findCalculatorByName будет выдано исключени");
-        throw new NotFoundException("Калькулятор с названием " + name + " не был найден");
+        throw new NotFoundException(new Date(), "Калькулятор с названием " + name + " не был найден");
     }
 
     public CalculatorInfoFull getOne(@Min(value = 0, message = "Идентификатор должен быть не меньше 0") Long id) {
         CalculatorInfoFull calculatorInfoFull = findCalculatorById(id);
         if (calculatorInfoFull == null) {
             log.warn("Для метода: getOne будет выдано исключение");
-            throw new NotFoundException("Калькулятор с идентификатором " + id + " не был найден");
+            throw new NotFoundException(new Date(), "Калькулятор с идентификатором " + id + " не был найден");
         }
         log.debug("Калькулятор был найден с помощью метода: getOne");
         return calculatorInfoFull;
@@ -76,7 +76,7 @@ public class CalculatorService {
         CalculatorInfo calculatorInfoFull = findCalculatorByName(name);
         if (calculatorInfoFull == null) {
             log.warn("Для метода: getInfo будет выдано исключение");
-            throw new NotFoundException("Калькулятор с названием " + name + " не был найден");
+            throw new NotFoundException(new Date(), "Калькулятор с названием " + name + " не был найден");
         }
         log.debug("Калькулятор был найден с помощью метода: getInfo");
         return calculatorInfoFull;
