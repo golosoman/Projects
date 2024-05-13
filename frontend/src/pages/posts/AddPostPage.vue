@@ -82,6 +82,7 @@ export default {
                     return false
                 }
             } catch (error) {
+                console.log(error.message)
                 errorMessage.value = error.errors[0]
             }
         }
@@ -115,3 +116,6 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+</style>
