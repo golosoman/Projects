@@ -11,11 +11,16 @@ export default {
         Loader
     },
     setup() {
-        const { posts, isPostsLoading } = usePosts(true)
+        const { posts, isPostsLoading } = usePosts(false)
         const { sortedPosts, selectedSort } = useSortedPosts(posts)
         const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPosts(sortedPosts)
-        console.log(posts, 'PostPage')
+        console.log(posts, 'PostConfirmPage')
         return { posts, isPostsLoading, searchQuery, sortedAndSearchedPosts, selectedSort }
+    },
+    methods: {
+        removePost(id) {
+      this.posts = this.posts.filter(p => p.id !== id)
+    },
     }
 }
 </script>
@@ -41,8 +46,8 @@ export default {
     <loader v-if="isPostsLoading" />
     <div v-else class="content row d-flex justify-content-center">
         <div class="content w-75">
-            <h2 v-if="posts.length === 0" class="mt-3">Доступных постов нету</h2>
-            <post-list v-else :postList="sortedAndSearchedPosts" />
+            <h2 v-if="posts.length === 0" class="mt-3">Постов для проверки нету!</h2>
+            <post-list v-else :postList="sortedAndSearchedPosts" @del-post="removePost"/>
         </div>
     </div>
 </template>

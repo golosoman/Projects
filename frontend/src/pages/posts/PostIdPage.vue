@@ -102,7 +102,4 @@ export default {
 .setCardBackColor {
     background-color: #f0f2f5;
 }
-.alert-danger {
-  z-index: 9999;
-}
 </style>
