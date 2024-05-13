@@ -1,13 +1,13 @@
 import { ref, onMounted } from 'vue'
 import axios from '@/axiosConfig'
 
-export const usePosts = () => {
+export const usePosts = (status) => {
     const posts = ref([])
     const isPostsLoading = ref(true)
 
     onMounted(async () => {
         try {
-            const response = await axios.get(`/posts`)
+            const response = await axios.get(`/posts?status=${status}`)
             posts.value = response.data
             console.log(posts.value, 'Мои посты')
         } catch (error) {
