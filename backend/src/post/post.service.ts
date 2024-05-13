@@ -167,10 +167,12 @@ export class PostService {
         return post.comments;
     }
 
-    async getAllPosts(): Promise<PostDto[]> {
+    async getAllPosts(query: any): Promise<PostDto[]> {
+        let status = true;
+        if (query.status) status = query.status;
         try {
             const posts = await this.postRepository.findAll({
-                where: { status: true },
+                where: { status: status },
                 include: { all: true },
                 order: [["updatedAt", "DESC"]],
             });
@@ -205,6 +207,12 @@ export class PostService {
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    async setStatusTrue(id: number) {
+        const post = await this.postRepository.update({status: true}, {where:{id:id}})
+        console.log(post)
+        return true;
     }
 
     async updatePost(id: number, dto: CreatePostDto): Promise<boolean> {

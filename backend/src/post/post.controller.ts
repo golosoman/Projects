@@ -13,6 +13,7 @@ import {
     UseGuards,
     Req,
     Headers,
+    Query,
 } from "@nestjs/common";
 import { PostService } from "./post.service";
 import { PostDto } from "./dto/post.dto";
@@ -46,6 +47,7 @@ export class PostController {
         return this.postService.getOnePost(id);
     }
 
+
     @Post(":id/comments")
     @Roles("USER", "ADMIN")
     @UseGuards(RolesGuard)
@@ -66,9 +68,17 @@ export class PostController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    async getAll(): Promise<PostDto[]> {
+    async getAll(@Query() query: any): Promise<PostDto[]> {
         // console.log(123)
-        return this.postService.getAllPosts();
+        return this.postService.getAllPosts(query);
+    }
+
+    @Patch(":id/confirm")
+    @HttpCode(HttpStatus.OK)
+    async postConfirm(
+        @Param("id") id: number,
+    ){
+        return this.postService.setStatusTrue(id);
     }
 
     @Patch(":id")
