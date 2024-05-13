@@ -7,21 +7,35 @@ import AuthPage from '@/pages/auth/AuthPage.vue'
 import AddPostPage from '@/pages/posts/AddPostPage.vue'
 import store from '@/store/index.js'
 import CabinetPage from '@/pages/CabinetPage.vue'
+import PostConfirmPage from '@/pages/admin/PostConfirmPage.vue'
 // import PostIdPage from '@/pages/PostIdPage.vue'
 // import PostsPage from '@/pages/PostsPage.vue'
 
 const routes = [
     {
-        path: '/posts/:id',
-        name: 'post',
-        component: PostIdPage,
-        props: true
+        path: '/',
+        name: 'main',
+        redirect: '/posts'
     },
     {
         // main
         path: '/posts',
         name: 'posts',
         component: PostsPage
+    },
+    {
+        path: '/posts/confirm',
+        name: 'post-confirm',
+        component: PostConfirmPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/posts/:id',
+        name: 'post-id',
+        component: PostIdPage,
+        props: true
     },
     {
         path: '/posts/add',
@@ -55,15 +69,6 @@ const routes = [
             requiresAuth: true
         }
     },
-    // {
-    //   path: '/rersonal-account',
-    //   name: 'p-account',
-    //   component: <template><div>Нифига себе</div></template>
-    // },
-    {
-        path: '/',
-        redirect: '/posts'
-    }
 ]
 
 const router = createRouter({
