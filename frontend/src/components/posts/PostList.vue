@@ -8,12 +8,18 @@ const props = defineProps({
         require: true
     }
 })
+const emits = defineEmits(['delPost'])
+
+const deletePost = (id) => {
+    emits('delPost', id)
+}
+
 console.log(props.postList, 'PostList')
 </script>
 
 <template>
     <div class="posts_content p-3" v-for="(post, index) in props.postList" :key="index">
-        <PostCard :post="post" />
+        <PostCard :post="post" @del-post="deletePost"/>
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" class="alert alert-danger alert-dismissible fade show position-fixed w-100" role="alert">
+  <div v-if="visible" class="alert alert-danger alert-dismissible fade show position-fixed top-0 w-100" role="alert">
     <p><i>{{ `Произошла ошибка! ` }}</i> <b>{{ message }}</b></p>
     <button type="button" class="btn-close" @click="closeNotification"></button>
   </div>
@@ -56,3 +56,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.alert {
+  z-index: 9999;
+}
+</style>

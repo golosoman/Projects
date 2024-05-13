@@ -55,6 +55,9 @@
                     <a @click="$router.push('/')" class="nav-menu-item"
                         ><i class="fas fa-home me-3"></i>Посты</a
                     >
+                    <a v-if="isLoggedIn" @click="$router.push('/posts/confirm')" class="nav-menu-item"
+                        ><i class="fas fa-home me-3"></i>Модерация</a
+                    >
                 </div>
             </div>
         </div>

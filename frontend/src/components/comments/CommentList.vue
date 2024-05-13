@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
     <div v-if="props.commentsList.length === 0">
-        <p>Комментарии отсутствуют</p>
+        <p>Комментарии отсутствуют будьте первым!</p>
     </div>
     <TransitionGroup name="comments-list">
         <Comment :comment="comment" v-for="comment in props.commentsList" :key="comment.id" />
