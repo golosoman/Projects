@@ -18,7 +18,7 @@ public class BMICalculatorRequest extends BaseCalculatorRequest {
     private Double weightPatient;
 
     @Schema(description = "Рост человека в см", example = "176")
-    @Range(min = 45, max = 300, message = "'Рост' должен быть больше 45 см и не должен превышать 300 см")
+    @Range(min = 45, max = 300, message = "'Рост' должен быть меньше 45 см и не должен превышать 300 см")
     @NotNull(message = "Параметр 'рост' пациента является обязательным")
     private Double height;
 }
