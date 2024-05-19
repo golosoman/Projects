@@ -8,7 +8,9 @@ export function useCalculators(n: number) {
     const getAllInfo = async () => {
         try {
             for (let id = 1; id <= n; id++) {
-                const calculator: ICalculatorInfo = await axios.get(`/calculator/${id}`)
+                const response = await axios.get(`/calculator/${id}`)
+                const calculator: ICalculatorInfo = response.data
+                // console.log(calculator)
                 calculatorsInfo.value.push(calculator)
             }
         } catch (error) {
@@ -19,4 +21,5 @@ export function useCalculators(n: number) {
     onMounted(() => {
         getAllInfo()
     })
+    return {calculatorsInfo}
 }
