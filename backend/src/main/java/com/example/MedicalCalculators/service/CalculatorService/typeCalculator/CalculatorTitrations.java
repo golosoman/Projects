@@ -35,7 +35,7 @@ public class CalculatorTitrations extends BaseCalculator<TitrationCalculatorRequ
     public CalculatorResult calculate(TitrationCalculatorRequest calculatorRequest) {
         double dosage = calculatorRequest.getDosage();
         // Доза из мл/час в мкг/кг*мин
-        if (calculatorRequest.getIsMlInHour()) {
+        if (!calculatorRequest.getIsMlInHour()) {
             dosage *= 0.001 * calculatorRequest.getVolumeOfSolution() /
                     (calculatorRequest.getWeightPatient() * 1000 * 60);
         }
