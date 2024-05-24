@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg py-2 navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand">
+            <a href="/" class="navbar-brand">
                 <!-- Logo Image -->
                 <img
                     src="../static/image/logo.png"
@@ -29,7 +29,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a href="/" class="nav-link"
-                            >Главная <span class="sr-only">(current)</span></a
+                            >Главная</a
                         >
                     </li>
                     <li class="nav-item"><a href="/about" class="nav-link">Автор</a></li>
@@ -74,3 +74,10 @@
 import 'https://code.jquery.com/jquery-3.5.1.slim.min.js'
 import 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'
 </script>
+
+<style scoped>
+    .dropdown-item:active {
+        background-color: lightgrey; /* Цвет фона при нажатии */
+        color: black; /* Цвет текста при нажатии */
+    }
+</style>
