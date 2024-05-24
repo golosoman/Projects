@@ -3,3 +3,11 @@ export interface ICalculatorInfo {
     title: string
     description: string
 }
+
+export interface IInfo {
+    info: string
+}
+
+export interface ICalculatorResult {
+    result: number
+}
