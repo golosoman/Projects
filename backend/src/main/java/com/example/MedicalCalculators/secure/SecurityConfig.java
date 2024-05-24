@@ -14,11 +14,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().permitAll()
-                )
-                .httpBasic(withDefaults());
+        // Разрешить всем доступ ко всем путям
+        http.authorizeRequests()
+                .anyRequest()
+                .permitAll().and()
+                .csrf()
+                .disable();
         return http.build();
     }
     @Override
