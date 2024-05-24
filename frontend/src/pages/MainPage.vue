@@ -1,7 +1,7 @@
 <template>
-    <div class="content">
-        <h1>Ну типо привет!</h1>
-        <calculator-list-card :calculators="calculatorsInfo" />
+    <spin-loader v-if="isCalculatorLoading" />
+    <div v-else class="content mt-3">
+        <calculator-list-card  :calculators="calculatorsInfo" />
     </div>
 </template>
 <script>
@@ -13,9 +13,9 @@ export default {
         CalculatorListCard
     },
     setup() {
-        const {calculatorsInfo} = useCalculators(3)
+        const {calculatorsInfo, isCalculatorLoading } = useCalculators(3)
         console.log(calculatorsInfo) 
-        return { calculatorsInfo }
+        return { calculatorsInfo, isCalculatorLoading }
     }
 }
 </script>
