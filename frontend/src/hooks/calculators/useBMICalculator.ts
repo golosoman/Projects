@@ -1,21 +1,28 @@
 import axios from '@/axiosConfig'
-import { ref, type Ref, onUpdated} from 'vue'
-import type { ICalculatorResult } from '@/types/calculator';
+import baseAxios from 'axios'
+import type { ICalculatorResult } from '@/types/calculator'
 export function useBMICalculator(weight: number, height: number) {
     // const calculatorResult: Ref<ICalculatorResult | null> = ref(null);
 
-    const getResult = async() => {
+    const getResult = async () => {
         try {
-            const response = await axios.post<ICalculatorResult>('/calculator/body-mass-index/result', {
-                'weightPatient': weight,
-                'height': height
-            })
-            // calculatorResult.value = response.data;
+            const response = await axios.post<ICalculatorResult>(
+                '/calculator/body-mass-index/result',
+                {
+                    weightPatient: weight,
+                    height: height
+                }
+            )
             return response.data
-            console.log(response.data)
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+            if (baseAxios.isAxiosError(error)) {
+                throw error
+            } else if (error instanceof Error) {
+                console.log(error)
+            } else {
+                console.log('An unknown error occurred')
+            }
         }
     }
-    return {getResult}
+    return { getResult }
 }
