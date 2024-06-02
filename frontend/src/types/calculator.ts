@@ -1,11 +1,10 @@
-export interface ICalculatorInfo {
-    id: number
-    title: string
-    description: string
-}
-
 export interface IInfo {
     info: string
+}
+
+export interface ICalculatorInfo extends IInfo {
+    id: number
+    name: string
 }
 
 export interface ICalculatorResult {
