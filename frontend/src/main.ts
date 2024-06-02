@@ -2,13 +2,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import components from '@/components/UI'
 
 const app = createApp(App)
 
-components.forEach((component) => {
+components.forEach((component: any) => {
     app.component(component.name, component)
 })
 
-app.use(router).use(bootstrap).mount('#app')
+app.use(router).mount('#app')
