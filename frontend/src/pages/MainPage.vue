@@ -1,10 +1,10 @@
 <template>
-    <spin-loader v-if="isCalculatorLoading" />
+    <spin-loader v-if="isCalculatorsLoading" />
     <div v-else class="content mt-3">
-        <calculator-list-card  :calculators="calculatorsInfo" />
+        <calculator-list-card :calculators="calculatorsInfo" />
     </div>
 </template>
-<script>
+<script lang="ts">
 import { useCalculators } from '@/hooks/calculators/useCalculators'
 import CalculatorListCard from '@/components/CalculatorListCard.vue'
 
@@ -13,9 +13,9 @@ export default {
         CalculatorListCard
     },
     setup() {
-        const {calculatorsInfo, isCalculatorLoading } = useCalculators(3)
-        console.log(calculatorsInfo) 
-        return { calculatorsInfo, isCalculatorLoading }
+        const { calculatorsInfo, isCalculatorsLoading } = useCalculators(3)
+        console.log(calculatorsInfo)
+        return { calculatorsInfo, isCalculatorsLoading }
     }
 }
 </script>

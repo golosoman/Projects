@@ -2,6 +2,7 @@
 import { ref, type Ref } from 'vue'
 import { useTitrationCalculator } from '@/hooks/calculators/useTitrationCalculator'
 import { useCalculator } from '@/hooks/calculators/useCalculator'
+import axios from 'axios'
 export default {
     setup(props, ctx) {
         let amount_drug = ref('')
@@ -9,21 +10,35 @@ export default {
         let weight_patient = ref('')
         let dosage = ref('')
         let result: Ref<string> = ref('')
+        let isError: Ref<boolean> = ref(false)
+        let errorMessage: Ref<string> = ref('')
 
         const { calculatorInfo, isCalculatorLoading } = useCalculator('titration-rate')
-        
+
         const calculate_result = async () => {
             try {
                 const { getResult } = useTitrationCalculator(
                     Number(amount_drug.value),
                     Number(volume.value),
                     Number(weight_patient.value),
-                    Number(dosage.value),
+                    Number(dosage.value)
                 )
                 result.value = String((await getResult())?.result)
                 clearForm()
-            } catch (error) {
-                console.log(error)
+                isError.value = false
+            } catch (error: any) {
+                if (axios.isAxiosError(error)) {
+                    isError.value = true
+                    if (error.response && error.response.data && error.response.data.violations) {
+                        errorMessage.value = error.response.data.violations
+                            .map((violation: { message: string }) => violation.message)
+                            .join(', ')
+                    }
+                } else if (error instanceof Error) {
+                    errorMessage.value = error.message
+                } else {
+                    errorMessage.value = 'An unknown error occurred'
+                }
             }
         }
         const clearForm = () => {
@@ -40,7 +55,11 @@ export default {
             dosage,
             result,
             calculate_result,
-            clearForm, calculatorInfo, isCalculatorLoading
+            clearForm,
+            calculatorInfo,
+            isCalculatorLoading,
+            isError,
+            errorMessage
         }
     }
 }
@@ -90,12 +109,24 @@ export default {
                         </div>
                     </form>
                 </div>
-                <div class="col-6 row my-auto h-50 w-50 border pb-3 bg-light bg-gradient">
-                    <div class="col-12 my-auto border">
+                <div class="content col-6 row my-auto p-3 w-50 border bg-light bg-gradient">
+                    <div v-if="!isError" class="col-12 my-auto border">
                         Результат вычисления: {{ result }} мл/час
                     </div>
-                    <div class="col-12 border">
-                        А это значит: {{ (parseFloat(result) * 20 / 60).toFixed(2) }} капель в минуту
+                    <div v-else class="col-12 my-auto border">
+                        <span class="text-danger">Произошла ошибка!</span>
+                    </div>
+                    <div v-if="!isError" class="col-12 border mt-3">
+                        А также:
+                        {{
+                            isNaN(parseFloat(((parseFloat(result) * 20) / 60).toFixed(2)))
+                                ? ''
+                                : ((parseFloat(result) * 20) / 60).toFixed(2)
+                        }}
+                        капель в секунду
+                    </div>
+                    <div v-else class="col-12 border mt-3">
+                        Возможное решение: {{ errorMessage }}
                     </div>
                 </div>
             </div>
@@ -106,7 +137,7 @@ export default {
                 <div>
                     <h2>Об калькуляторе</h2>
                     <p>
-                       {{ calculatorInfo?.info.split('Формула:')[0] }}
+                        {{ calculatorInfo?.info.split('Формула:')[0] }}
                     </p>
                 </div>
                 <div>
@@ -131,11 +162,11 @@ export default {
                         раствора равным 20 мл
                     </p>
                     <img
-                    src="../../static/image/calculators/titration_rate/table.png"
-                    width=""
-                    alt="Таблица"
-                    class="d-inline-block align-middle mr-2"
-                />
+                        src="../../static/image/calculators/titration_rate/table.png"
+                        width=""
+                        alt="Таблица"
+                        class="d-inline-block align-middle mr-2"
+                    />
                 </div>
                 <div class="content mt-3">
                     <h2>Краткие замечания по описанным препаратам</h2>
