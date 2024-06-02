@@ -21,6 +21,7 @@ import java.util.*;
 @Service
 @Validated
 public class CalculatorService {
+    @SuppressWarnings("rawtypes")
     private final Map<CalculatorType, BaseCalculator> calculators = new HashMap<>();
 
     public CalculatorService() {
@@ -31,7 +32,7 @@ public class CalculatorService {
     }
 
     private CalculatorInfoFull findCalculatorById(Long id) {
-        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
+        for (@SuppressWarnings("rawtypes") Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             if (entry.getKey().getId() == id) {
                 log.debug("Калькулятор был найден с помощью метода: findCalculatorById");
                 return entry.getValue().getInfoFull();
@@ -42,7 +43,7 @@ public class CalculatorService {
     }
 
     private CalculatorInfo findCalculatorByName(String name) {
-        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
+        for (@SuppressWarnings("rawtypes") Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             if (Objects.equals(entry.getKey().getName(), name)) {
                 log.debug("Калькулятор был найден с помощью метода: findCalculatorByName");
                 return entry.getValue().getInfo();
@@ -64,7 +65,7 @@ public class CalculatorService {
 
     public List<CalculatorInfoFull> getAll() {
         List<CalculatorInfoFull> calculatorsInfo = new ArrayList<>();
-        for (Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
+        for (@SuppressWarnings("rawtypes") Map.Entry<CalculatorType, BaseCalculator> entry : calculators.entrySet()) {
             log.debug("В калькуляторах есть по крайней мере один калькулятор");
             calculatorsInfo.add(entry.getValue().getInfoFull());
         }
@@ -83,16 +84,19 @@ public class CalculatorService {
 
     }
 
+    @SuppressWarnings("unchecked")
     public CalculatorResult getBMIResult(@Valid BMICalculatorRequest calculatorRequest) {
         log.debug("Запущен метод getBMIResult");
         return calculators.get(CalculatorType.BODY_MASS_INDEX).calculate(calculatorRequest);
     }
 
+    @SuppressWarnings("unchecked")
     public CalculatorResult getTitrationResult(@Valid TitrationCalculatorRequest calculatorRequest) {
         log.debug("Запущен метод getTitrationResult");
         return calculators.get(CalculatorType.TITRATIONS).calculate(calculatorRequest);
     }
 
+    @SuppressWarnings("unchecked")
     public CalculatorResult getRIDDResult(@Valid RIDDCalculatorRequest calculatorRequest) {
         log.debug("Запущен метод getRIDDResult");
         return calculators.get(CalculatorType.RATE_INTRAVENOUS_DRIP_DRUG).calculate(calculatorRequest);
