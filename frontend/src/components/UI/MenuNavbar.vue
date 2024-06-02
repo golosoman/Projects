@@ -4,7 +4,7 @@
             <a href="/" class="navbar-brand">
                 <!-- Logo Image -->
                 <img
-                    src="../static/image/logo.png"
+                    src="../../static/image/logo.png"
                     width="45"
                     alt=""
                     class="d-inline-block align-middle mr-2"
@@ -28,9 +28,7 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a href="/" class="nav-link"
-                            >Главная</a
-                        >
+                        <a href="/" class="nav-link">Главная</a>
                     </li>
                     <li class="nav-item"><a href="/about" class="nav-link">Автор</a></li>
                     <li class="nav-item dropdown">
@@ -70,14 +68,18 @@
         </div>
     </nav>
 </template>
-<script>
+
+<script lang="ts">
 import 'https://code.jquery.com/jquery-3.5.1.slim.min.js'
 import 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'
+export default {
+    name: 'menu-navbar'
+}
 </script>
 
 <style scoped>
-    .dropdown-item:active {
-        background-color: lightgrey; /* Цвет фона при нажатии */
-        color: black; /* Цвет текста при нажатии */
-    }
+.dropdown-item:active {
+    background-color: lightgrey; /* Цвет фона при нажатии */
+    color: black; /* Цвет текста при нажатии */
+}
 </style>

@@ -1,4 +1,4 @@
-<template> 
+<template>
     <div class="card-deck d-flex justify-content-around">
         <CalculatorCard
             v-for="calculator in calculators"
@@ -7,15 +7,15 @@
         />
     </div>
 </template>
-<script setup>
-import CalculatorCard from "./CalculatorCard.vue";
-import {defineProps} from "vue"
+<script setup lang="ts">
+import CalculatorCard from './CalculatorCard.vue'
+import { defineProps } from 'vue'
+import { type ICalculatorInfo } from '@/types/calculator'
 
 const props = defineProps({
     calculators: {
-        type: Array,
+        type: Array<ICalculatorInfo>,
         required: true
     }
 })
-
 </script>

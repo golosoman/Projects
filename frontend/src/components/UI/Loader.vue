@@ -1,11 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="loader"></div>
 </template>
 
 <script lang="ts">
 export default {
-    name: 'spin-loader',
+    name: 'spin-loader'
 }
 </script>
 
