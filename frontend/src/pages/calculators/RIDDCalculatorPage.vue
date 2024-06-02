@@ -2,24 +2,38 @@
 import { ref, type Ref } from 'vue'
 import { useRIDDCalculator } from '@/hooks/calculators/useRIDDCalculator'
 import { useCalculator } from '@/hooks/calculators/useCalculator'
+import axios from 'axios'
+
 export default {
     setup(props, ctx) {
         let volume: Ref<string> = ref('')
         let time: Ref<string> = ref('')
         let result: Ref<string> = ref('')
+        // let resultInDrops: Ref<String> = ref('')
+        let isError: Ref<boolean> = ref(false)
+        let errorMessage: Ref<string> = ref('')
 
         const { calculatorInfo, isCalculatorLoading } = useCalculator('rate-intravenous-drip-drug')
 
         const calculate_result = async () => {
             try {
-                const { getResult } = useRIDDCalculator(
-                    Number(volume.value),
-                    Number(time.value)
-                )
+                const { getResult } = useRIDDCalculator(Number(volume.value), Number(time.value))
                 result.value = String((await getResult())?.result)
                 clearForm()
-            } catch (error) {
-                console.log(error)
+                isError.value = false
+            } catch (error: any) {
+                if (axios.isAxiosError(error)) {
+                    isError.value = true
+                    if (error.response && error.response.data && error.response.data.violations) {
+                        errorMessage.value = error.response.data.violations
+                            .map((violation: { message: string }) => violation.message)
+                            .join(', ')
+                    }
+                } else if (error instanceof Error) {
+                    errorMessage.value = error.message
+                } else {
+                    errorMessage.value = 'An unknown error occurred'
+                }
             }
         }
 
@@ -33,14 +47,20 @@ export default {
             time,
             result,
             calculate_result,
-            clearForm, calculatorInfo, isCalculatorLoading
+            clearForm,
+            calculatorInfo,
+            isCalculatorLoading,
+            isError,
+            errorMessage
         }
     }
 }
 </script>
 <template>
     <div class="content border border-1 border-secondary rounded-3 p-3 mx-5 my-3">
-        <h1 class="text-center">Калькулятор для расчет скорости внутривенного капельного введения препарата</h1>
+        <h1 class="text-center">
+            Калькулятор для расчет скорости внутривенного капельного введения препарата
+        </h1>
         <div class="content row d-flex justify-content-between">
             <div class="content w-75 row">
                 <div class="col-6 px-5 py-2 mb-3">
@@ -67,11 +87,25 @@ export default {
                         </div>
                     </form>
                 </div>
-                <div class="content col-6 row my-auto h-50 w-50 border pb-3 bg-light bg-gradient">
-                    <div class="col-12 my-auto border">
+                <div class="content col-6 row my-auto p-3 w-50 border bg-light bg-gradient">
+                    <div v-if="!isError" class="col-12 my-auto border">
                         Результат вычисления: {{ result }} капель в минуту
                     </div>
-                    <div class="col-12 border">А также: {{ (parseFloat(result) / 60).toFixed(2) }}  капель в секунду</div>
+                    <div v-else class="col-12 my-auto border">
+                        <span class="text-danger">Произошла ошибка!</span>
+                    </div>
+                    <div v-if="!isError" class="col-12 border mt-3">
+                        А также:
+                        {{
+                            isNaN(parseFloat((parseFloat(result) / 60).toFixed(2)))
+                                ? ''
+                                : (parseFloat(result) / 60).toFixed(2)
+                        }}
+                        капель в секунду
+                    </div>
+                    <div v-else class="col-12 border mt-3">
+                        Возможное решение: {{ errorMessage }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +113,7 @@ export default {
         <div class="content px-3">
             <div>
                 <h2>Об калькуляторе</h2>
-                <p>{{calculatorInfo?.info.split('.')[0] + '.'}}</p>
+                <p>{{ calculatorInfo?.info.split('.')[0] + '.' }}</p>
             </div>
             <div>
                 <h2>Формула</h2>

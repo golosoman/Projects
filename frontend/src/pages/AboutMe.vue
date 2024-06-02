@@ -6,11 +6,7 @@
                     <div class="area1 p-3 py-5"></div>
                     <div class="area2 p- text-center px-3">
                         <div class="image mr-3">
-                            <img
-                                src="../static/image/author.png"
-                                class="rounded-circle"
-                                width="100"
-                            />
+                            <img src="../static/image/author.png" class="rounded-4" width="100" />
                             <h4 class="name mt-3">Лапин Константин Сергеевич</h4>
                             <p class="information mt-3 text-justify">
                                 Меня зовут Лапин Константин, и я студент третьего курса
@@ -25,7 +21,7 @@
                                 разработки графических приложений: Unity
                             </p>
                             <p class="information mt-3 text-justify">
-                                У меня есть практический опыт разработки веб-приложений как в 
+                                У меня есть практический опыт разработки веб-приложений как в
                                 backend-е, так и frontend-е. Я работал с Node.js, Express, Nest.js,
                                 JavaScript, TypeScript, Vue, HTML и CSS.
                             </p>
@@ -35,10 +31,21 @@
                                 вызовам и задачам и стремлюсь к постоянному профессиональному росту.
                             </p>
                             <p class="information mt-3 text-justify">
-                                Документацию к калькуляторам можете найти здесь: <a href="http://localhost:8080/swagger-ui/index.html#/Контроллер%20API%20калькуляторов/get">ТЫК</a>
+                                Документацию к калькуляторам можете найти здесь:
+                                <a
+                                    href="http://localhost:8080/swagger-ui/index.html#/Контроллер%20API%20калькуляторов/get"
+                                    >ТЫК</a
+                                >
                             </p>
-                            <div class="d-flex justify-content-center mt-5">
-                                <a class="btn btn-secondary mx-2" href="https://github.com/golosoman">
+                            <p class="information mt-3 text-justify">
+                                Посмотреть мои проекты на gitHub и связаться со мной можно по
+                                ссылочкам ниже:
+                            </p>
+                            <div class="d-flex justify-content-center mt-2">
+                                <a
+                                    class="btn btn-secondary mx-2"
+                                    href="https://github.com/golosoman"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
@@ -83,7 +90,7 @@
     border-radius: 14px !important;
 }
 .area1 {
-    background-color: #6f6f84;
+    background-color: #99b09d;
     border-top-left-radius: 14px !important;
     border-top-right-radius: 14px !important;
     padding-top: 83px !important;

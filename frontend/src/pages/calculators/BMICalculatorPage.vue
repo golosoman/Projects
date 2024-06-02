@@ -2,12 +2,15 @@
 import { onMounted, onUpdated, ref, type Ref } from 'vue'
 import { useBMICalculator } from '@/hooks/calculators/useBMICalculator'
 import { useCalculator } from '@/hooks/calculators/useCalculator'
+import axios from 'axios'
 export default {
     setup(props, ctx) {
         let body_weight: Ref<string> = ref('')
         let body_height: Ref<string> = ref('')
         let result: Ref<string> = ref('')
         let textRecommendation: Ref<string> = ref('')
+        let isError: Ref<boolean> = ref(false)
+        let errorMessage: Ref<string> = ref('')
 
         const { calculatorInfo, isCalculatorLoading } = useCalculator('body-mass-index')
 
@@ -20,8 +23,20 @@ export default {
                 result.value = String((await getResult())?.result)
                 recommendation()
                 clearForm()
-            } catch (error) {
-                console.log(error)
+                isError.value = false
+            } catch (error: any) {
+                if (axios.isAxiosError(error)) {
+                    isError.value = true
+                    if (error.response && error.response.data && error.response.data.violations) {
+                        errorMessage.value = error.response.data.violations
+                            .map((violation: { message: string }) => violation.message)
+                            .join(', ')
+                    }
+                } else if (error instanceof Error) {
+                    errorMessage.value = error.message
+                } else {
+                    errorMessage.value = 'An unknown error occurred'
+                }
             }
         }
 
@@ -31,8 +46,8 @@ export default {
         }
 
         const recommendation = () => {
-            let currentResult = parseFloat(result.value);
-            console.log(result.value)
+            let currentResult = parseFloat(result.value)
+            // console.log(result.value)
             if (currentResult <= 16) {
                 textRecommendation.value = 'Выраженный дефицит массы тела'
             } else if (currentResult <= 18.5) {
@@ -45,7 +60,7 @@ export default {
                 textRecommendation.value = 'Ожирение первой степени'
             } else if (currentResult <= 40) {
                 textRecommendation.value = 'Ожирение второй степени'
-            }else if (currentResult > 40) {
+            } else if (currentResult > 40) {
                 textRecommendation.value = 'Ожирение третьей степени (морбидное)'
             } else {
                 textRecommendation.value = 'Невозможно интерпретировать результат'
@@ -61,7 +76,9 @@ export default {
             calculate_result,
             textRecommendation: textRecommendation,
             clearForm,
-            recommendation
+            recommendation,
+            isError,
+            errorMessage
         }
     }
 }
@@ -95,9 +112,19 @@ export default {
                         </div>
                     </form>
                 </div>
-                <div class="content col-6 row my-auto h-50 w-50 border pb-3 bg-light bg-gradient">
-                    <div class="col-12 my-auto border">Результат вычисления: {{ result }} в кг/м²</div>
-                    <div class="col-12 border">Рекомендация: {{ textRecommendation }}</div>
+                <div class="content col-6 row my-auto p-3 w-50 border bg-light bg-gradient">
+                    <div v-if="!isError" class="col-12 my-auto border">
+                        Результат вычисления: {{ result }} в кг/м²
+                    </div>
+                    <div v-else class="col-12 my-auto border">
+                        <span class="text-danger">Произошла ошибка!</span>
+                    </div>
+                    <div v-if="!isError" class="col-12 border mt-3">
+                        Рекомендация: {{ textRecommendation }}
+                    </div>
+                    <div v-else class="col-12 border mt-3">
+                        Возможное решение: {{ errorMessage }}
+                    </div>
                 </div>
             </div>
         </div>
