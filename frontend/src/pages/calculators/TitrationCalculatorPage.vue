@@ -123,7 +123,7 @@ export default {
                                 ? ''
                                 : ((parseFloat(result) * 20) / 60).toFixed(2)
                         }}
-                        капель в секунду
+                        капель в минуту
                     </div>
                     <div v-else class="col-12 border mt-3">
                         Возможное решение: {{ errorMessage }}
