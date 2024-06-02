@@ -4,12 +4,9 @@
     </button>
 </template>
 <script lang="ts">
-import { Ripple, initMDB } from 'mdb-ui-kit'
 export default {
     name: 'base-button',
-    setup() {
-        initMDB({ Ripple })
-    }
+    setup() {}
 }
 </script>
 <style scoped></style>
