@@ -5,18 +5,32 @@ from app.Browser import Browser
 from app.AutoClicker import AutoClicker
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from app.handler.BaseHandler import BaseHandler
 
-class AutoClickerHandler:
-    def __init__(self, config: Config, browser: Browser, autoclicker_config: AutoClicker) -> None:
-        print("Запуск __init__ AutoClickerHandler")
-        self.config = config
+class AutoClickerHandler(BaseHandler):
+    """
+    Класс для управления автокликерном.
+    """
+    def __init__(self, config: Config, browser: Browser) -> None:
+        """
+        Инициализация обработчика автокликера.
+
+        Args:
+            config (Config): Объект конфигурации.
+            browser (Browser): Объект браузера.
+        """
+        print("Запуск init AutoClickerHandler")
+        super().__init__(config)
         self.browser = browser
-        self.autoclicker_config = autoclicker_config
-        
-
-    # ==========================Запуск АвтоКликера (начало)===================================================
+        self.autoclicker_config = AutoClicker(config)
 
     async def start_autoclicker_command(self, message: types.Message) -> None:
+        """
+        Обработка команды запуска автокликера.
+
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
         print("Запуск start_autoclicker")
         try:
             if self.autoclicker_config.get_status():
@@ -35,6 +49,12 @@ class AutoClickerHandler:
             print(f"Возникла ошибка: {e}")
         
     async def __autoclick_loop(self, message: types.Message) -> None: 
+        """
+        Цикл автокликера.
+
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
         print("Запуск autoclick_loop")
         self.browser.get_driver().get(self.config.GAME_URL)
         element = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.CLICK_TARGET_XPATH)))
@@ -47,13 +67,33 @@ class AutoClickerHandler:
                 # Клик по элементу
                 element.click()
                 count_clicks += 1
-                if ( count_clicks == 5000 ):
+                if (count_clicks == 5000 ):
                     print("Клик! 5000")
                     count_clicks = 0
             except Exception as e:
                 # Если произошла ошибка, останавливаем автокликер
                 self.autoclicker_config.set_status(False)
                 raise e
+            
+    async def stop_autoclicker_command(self, message: types.Message) -> None:
+        """
+        Обработка команды остановки автокликера.
 
-        
-    # ==========================Запуск АвтоКликера (конец)===================================================
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
+        print("Запуск stop_autoclicker")
+        try:
+            if not self.autoclicker_config.get_status():
+                await message.answer("Автокликер не запущен.")
+                return
+
+            self.autoclicker_config.set_status(False)
+            # Отмена задачи автокликера
+            task = self.autoclicker_config.get_autoclicker_thread()
+            if task is not None:
+                task.cancel()
+                self.autoclicker_config.set_status(False)
+            await message.answer("Кликер был остановлен.")
+        except Exception as e:
+            print(f"Возникла ошибка: {e}")

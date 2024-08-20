@@ -20,7 +20,7 @@ class Browser:
         Args:
             config: Объект конфигурации Config, используемый для настройки браузера.
         """
-        self.__driver = self.init_driver()  # Инициализация self.__driver
+        self.__driver = self.init_driver()
         self.__wait_time = WebDriverWait(self.__driver, int(config.WEB_DRIVER_WAIT))
 
     def init_driver(self) -> Chrome:
@@ -66,7 +66,7 @@ class Browser:
         """
         self.__wait_time = WebDriverWait(self.__driver, wait_time)
 
-    def __del__(self) -> None:  # Использование правильного имени метода
+    def __del__(self) -> None:
         """
         Закрывает драйвер браузера при удалении объекта Browser.
         """
