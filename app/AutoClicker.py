@@ -19,7 +19,7 @@ class AutoClicker:
             config: Объект конфигурации Config, используемый для установки начального количества кликов в секунду.
         """
         self.__autoclicker_enabled = False
-        self.__count_clicks_per_second= config.COUNT_CLICKS_PER_SECOND
+        self.__count_clicks_per_second= float(config.COUNT_CLICKS_PER_SECOND)
         self.__autoclicker_thread = None
 
     def set_clicks_per_second(self, count_clicks: int) -> None:
