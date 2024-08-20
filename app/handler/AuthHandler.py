@@ -8,16 +8,31 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from aiogram.dispatcher import FSMContext
 from app.Browser import Browser
+from app.handler.BaseHandler import BaseHandler
 
-class AuthHandler:
+class AuthHandler(BaseHandler):
+    """
+    Класс для управления авторизацией.
+    """
     def __init__(self, config: Config, browser: Browser ) -> None:
-        print("Запуск __init__ AuthHandler")
-        self.config = config
+        """
+        Инициализация обработчика авторизации.
+
+        Args:
+            config (Config): Объект конфигурации.
+            browser (Browser): Объект браузера.
+        """
+        print("Запуск init AuthHandler")
+        super().__init__(config)
         self.browser = browser
 
-    # ==========================Авторизация (начало)===================================================
-
     async def auth_command(self, message: types.Message) -> None:
+        """
+        Обработка команды авторизации.
+
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
         print("Запуск handler auth")
         try:
             await message.answer("Запускаю приложение AlfaBank. Скоро будет QR-код, приготовьте камеру.")
@@ -27,6 +42,12 @@ class AuthHandler:
             await message.answer(f"Произошла ошибка при авторизации: {e}")
     
     async def __execute_qr(self, message: types.Message) -> None:
+        """
+        Получение и отправка QR-кода пользователю.
+
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
         print("Запуск get_qr")
         try:
             # Парсинг QR-кода с сайта
@@ -41,13 +62,19 @@ class AuthHandler:
                 raise Exception('Не удалось получить qrCode')
             
              # Отправка изображения пользователю
-            await message.answer_photo(qr_bytes, caption="QR-код:\nЧтобы получить новый QR-код, используйте команду /get_qr.")
+            await message.answer_photo(qr_bytes, caption="QR-код:nЧтобы получить новый QR-код, используйте команду /get_qr.")
         except Exception as e:
             print("qr не удалось получить")
             raise e
 
 
     async def __process_qr(self, message: types.Message) -> None:
+        """
+        Обработка QR-кода.
+
+        Args:
+            message (types.Message): Сообщение от пользователя.
+        """
         print("Запуск функции process_qr")
         try:
             await self.__execute_qr(message)
@@ -72,12 +99,18 @@ class AuthHandler:
 
 
     async def __get_qr_from_website(self) -> Image:
+        """
+        Получение QR-кода с сайта.
+
+        Returns:
+            Image: QR-код в формате PIL.Image.
+        """
         print("Запуск get_qr_from_website")
         try:
             self.browser.get_driver().get(self.config.AUTH_URL)
 
             # Добавьте задержку для загрузки QR-кода (например, 3 секунды) 
-            time.sleep(3)
+            # time.sleep(3)
 
             # Ждем, пока элемент canvas с QR-кодом не будет загружен
             canvas = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.QR_XPATH)))
@@ -94,50 +127,19 @@ class AuthHandler:
             raise e
     
     async def __authorize_by_qr(self) -> bool:
+        """
+        Авторизация по QR-коду.
+
+        Returns:
+            bool: True, если авторизация прошла успешно, False в противном случае.
+        """
         self.browser.get_driver().get(self.config.LK_URL)
         try:
             # Ждем появления кнопки "Доверять"
             self.browser.get_wait_time().until(EC.element_to_be_clickable((By.XPATH, self.config.TRUST_BUTTON_XPATH)))
-
-            # Нажимаем кнопку "Доверять"
-            self.browser.get_driver().find_element(By.XPATH, self.config.TRUST_BUTTON_XPATH).click()
-            print("Кнопка доверять найдена и нажата")
-        except:
-            print("Кнопка 'Доверять' не найдена, пропуск шага")
+            # Клик по кнопке "Доверять"
+            #self.browser.get_driver().find_element(By.XPATH, self.config.TRUST_BUTTON_XPATH).click()
+            await self.__get_qr_from_website()
+            return True
+        except Exception as e:
             return False
-        return True
-    
-    async def __code(self, message: types.Message, state: FSMContext) -> None:
-        print("Запуск handler-состояния code")
-        try:
-            await state.update_data(code=message.text)
-            await self.__complete_authorization(message, state)
-            await state.finish()
-        except Exception as e:
-            raise e
-        
-
-    async def __complete_authorization(self, message: types.Message, state: FSMContext) -> None:
-        print("Запуск complete_authorization")
-        data = await state.get_data()
-        code = data['code']
-
-        try:
-             # Проверка ввода
-            if len(code) != 6:
-                raise ValueError("Секретный код должен состоять из шести цифр.")
-
-            # Вводим секретный код
-            self.browser.get_driver().find_element(By.XPATH, self.config.CODE_INPUT_XPATH_1).send_keys(code)
-            self.browser.get_driver().find_element(By.XPATH, self.config.CODE_INPUT_XPATH_2).send_keys(code)
-
-            # Нажимаем кнопку "Сохранить"
-            self.browser.get_driver().find_element(By.XPATH, self.config.SAVE_BUTTON_XPATH).click()
-
-            await message.answer("Авторизация завершена!")
-        except Exception as e:
-            raise e
-            # await message.answer(f"Произошла ошибка при авторизации и установке кода доверия: {e}")
-            
-
-    # ==========================Авторизация (конец)===================================================
