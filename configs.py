@@ -35,7 +35,7 @@ class Config:
     CODE_INPUT_XPATH_2 = os.getenv('CODE_INPUT_XPATH_2')
     SAVE_BUTTON_XPATH = os.getenv('SAVE_BUTTON_XPATH')
     WEB_DRIVER_WAIT = int(os.getenv('WEB_DRIVER_WAIT'))
-    COUNT_CLICKS_PER_SECOND = int(os.getenv('COUNT_CLICKS_PER_SECOND'))
+    COUNT_CLICKS_PER_SECOND = float(os.getenv('COUNT_CLICKS_PER_SECOND'))
     TYPE_BROWSER = os.getenv('TYPE_BROWSER')
 
 

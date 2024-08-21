@@ -60,20 +60,27 @@ class AutoClickerHandler(BaseHandler):
         element = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.CLICK_TARGET_XPATH)))
         count_clicks = 0
         await message.answer("Кликер начал кликать :D")
-        while self.autoclicker_config.get_status():
+        while True:
             try:
                 # Задержка между кликами
                 await asyncio.sleep(1 / self.autoclicker_config.get_clicks_per_second())
                 # Клик по элементу
                 element.click()
                 count_clicks += 1
-                if (count_clicks == 5000 ):
-                    print("Клик! 5000")
+                
+                if (count_clicks == 10000 ):
+                    print("Клик! 10000")
+                    element = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.AVAILABLE_CLICKS_XPATH)))
+                    await message.answer(f"Текст элемента: {element.text}")
                     count_clicks = 0
+
+                if (self.autoclicker_config.get_status()):
+                    break
             except Exception as e:
                 # Если произошла ошибка, останавливаем автокликер
                 self.autoclicker_config.set_status(False)
                 raise e
+        print('Кликер остановлен')
             
     async def stop_autoclicker_command(self, message: types.Message) -> None:
         """
