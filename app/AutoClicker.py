@@ -22,7 +22,7 @@ class AutoClicker:
         self.__count_clicks_per_second= float(config.COUNT_CLICKS_PER_SECOND)
         self.__autoclicker_thread = None
 
-    def set_clicks_per_second(self, count_clicks: int) -> None:
+    def set_clicks_per_second(self, count_clicks: float) -> None:
         """
         Устанавливает новое количество кликов в секунду.
 
@@ -31,7 +31,7 @@ class AutoClicker:
         """
         self.__count_clicks_per_second = count_clicks
 
-    def get_clicks_per_second(self) -> int:
+    def get_clicks_per_second(self) -> float:
         """
         Возвращает текущее количество кликов в секунду.
 
