@@ -48,7 +48,7 @@ class Browser:
                 service=ChromeService(), options=chrome_options)
         elif config.TYPE_BROWSER == "FIREFOX":
             firefox_options = FirefoxOptions()
-            firefox_options.add_argument('--headless=new')
+            firefox_options.add_argument('--headless')
             driver = webdriver.Firefox(
                 service=FirefoxService(), options=firefox_options)
         else:
