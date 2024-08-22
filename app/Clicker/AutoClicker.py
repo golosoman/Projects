@@ -44,7 +44,8 @@ class AutoClicker:
         Returns:
             Текущее количество кликов в секунду.
         """
-        logger.debug("Отработал get_clicks_per_second AutoClicker")
+        # Временно уберу
+        # logger.debug("Отработал get_clicks_per_second AutoClicker")
         return self.__count_clicks_per_second
 
     def set_status(self, status: bool) -> None:
@@ -64,7 +65,8 @@ class AutoClicker:
         Returns:
             Текущее состояние автоклика (True - включено, False - выключено).
         """
-        logger.debug("Отработал get_status AutoClicker")
+        # Временно уберу
+        # logger.debug("Отработал get_status AutoClicker")
         return self.__autoclicker_enabled
 
     def set_autoclicker_thread(self, task: Task) -> None:

@@ -131,7 +131,7 @@ class AutoClickerHandler(BaseHandler):
                         count_clicks = 0
                     # Проверка статуса кликера
                     if (not self.autoclicker_config.get_status()):
-                        logger.debug(
+                        logger.info(
                             f"Выходим из цикла __autoclick_loop AutoClickerHandler")
                         break
                 except Exception as e:
