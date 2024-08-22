@@ -3,7 +3,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.utils.executor import start_polling
 from aiogram import types
-import time
 from config import config, Config
 from ..Browser import Browser, BrowserHandler
 from ..State import UserStates
@@ -66,6 +65,8 @@ class BotManager:
             self.dp.register_message_handler(
                 self.__browser_handler.go_to_game_page_command, commands=['go_to_game_page'])
             self.dp.register_message_handler(
+                self.__browser_handler.go_to_lk_page_command, commands=['go_to_lk_page'])
+            self.dp.register_message_handler(
                 self.__browser_handler.get_my_game_money_command, commands=['get_my_game_money'])
             self.dp.register_message_handler(
                 self.__auth_handler.__handle_code, state=UserStates.code)
@@ -95,6 +96,7 @@ class BotManager:
                 "/get_my_game_money - получить количество заработанных коинов",
                 "/change_click_rate - изменить количество кликов в секунду",
                 "/get_text - получить текст из текущей страницы",
+                "/go_to_lk_page - переход на страницу личного кабинета"
                 "/get_body - получить body из текущей страницы (скорее всего не сработает)",
             ]
             await message.answer("\n".join(f"{i+1})  {command} \n" for i, command in enumerate(list_command)))

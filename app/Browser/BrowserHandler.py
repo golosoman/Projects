@@ -104,6 +104,23 @@ class BrowserHandler(BaseHandler):
             await message.answer("Не удалось загрузить страницу!")
         logger.info("Завершение go_to_game_page_command BrowserHandler")
 
+    async def go_to_lk_page_command(self, message: types.Message) -> None:
+        """
+        Переход на страницу личного кабинета.
+
+        Args:
+            message: Сообщение от пользователя.
+        """
+        logger.info("Запуск go_to_lk_page_command BrowserHandler")
+        try:
+            self.browser.get_driver().get(self.config.LK_URL)
+            await self.print_page_text_command(message)
+        except Exception as e:
+            logger.error(
+                f"go_to_lk_page_command BrowserHandler был завершен с ошибкой! {e}")
+            await message.answer("Не удалось загрузить страницу!")
+        logger.info("Завершение go_to_lk_page_command BrowserHandler")
+
     async def print_body_content_command(self, message: types.Message) -> None:
         """
         Выводит в консоль все, что находится в <body> текущей страницы.
