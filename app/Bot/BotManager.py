@@ -69,7 +69,7 @@ class BotManager:
             self.dp.register_message_handler(
                 self.__browser_handler.get_my_game_money_command, commands=['get_my_game_money'])
             self.dp.register_message_handler(
-                self.__auth_handler.__handle_code, state=UserStates.code)
+                self.__auth_handler.handle_code, state=UserStates.code)
             self.dp.register_message_handler(
                 self.some_other_command, lambda message: message.text.startswith('/'))
         except Exception as e:
