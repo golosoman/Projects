@@ -82,7 +82,7 @@ class AutoClickerHandler(BaseHandler):
         try:
             # Проверяем, уже ли открыта страница игры
             current_url = self.browser.get_driver().current_url
-            if current_url != self.config.GAME_URL:
+            if (current_url != self.config.GAME_URL_FAKE):
                 self.browser.get_driver().get(self.config.GAME_URL)
             
              # Проверяем, есть ли запущенный автокликер
