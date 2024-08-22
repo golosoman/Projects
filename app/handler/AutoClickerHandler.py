@@ -72,7 +72,7 @@ class AutoClickerHandler(BaseHandler):
                 
                 if (count_clicks == 10000 ):
                     print("Клик! 10000")
-                    element = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.AVAILABLE_CLICKS_XPATH)))
+                    # element = self.browser.get_wait_time().until(EC.presence_of_element_located((By.XPATH, self.config.AVAILABLE_CLICKS_XPATH)))
                     # await message.answer(f"Текст элемента: {element.text}")
                     count_clicks = 0
 
