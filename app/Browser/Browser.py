@@ -25,7 +25,7 @@ class Browser:
             config: Объект конфигурации Config, используемый для настройки браузера.
         """
         logger.info("Запуск __init__ Browser")
-        self.__driver = self.init_driver()
+        self.__driver = self.init_driver(config)
         self.__wait_time = WebDriverWait(
             self.__driver, int(config.WEB_DRIVER_WAIT))
         logger.info("Завершение __init__ Browser")

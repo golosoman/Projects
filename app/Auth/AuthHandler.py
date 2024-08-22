@@ -64,12 +64,7 @@ class AuthHandler(BaseHandler):
             time.sleep(10)
             self.browser.get_driver().get(self.config.LK_URL)
 
-            # Авторизация - возможно попросят установить секретный код
-            if (await self.__authorize_by_qr()):
-                # Запрос секретного кода
-                logger.info("В __process_qr появилась кнопка доверия")
-                await message.answer("Введите секретный код:")
-                await UserStates.code.set()
+            await self.__authorize_by_qr(message)
 
             await message.answer("Чтобы запустить автокликер, используйте команду /start_autoclicker.")
             logger.info("__process_qr авторизация завершена успешно!")
@@ -135,9 +130,9 @@ class AuthHandler(BaseHandler):
                 "__get_qr_from_website AuthHandler был завершен с ошибкой!")
             raise e
 
-    async def __authorize_by_qr(self) -> bool:
+    async def __authorize_by_qr(self, message: types.Message) -> bool:
         """
-        Авторизация по QR-коду.
+        Продолжение авторизации, подтверждение устройства.
         """
         logger.info("Запуск __authorize_by_qr AuthHandler")
         try:
@@ -148,6 +143,9 @@ class AuthHandler(BaseHandler):
             # Клик по кнопке "Доверять"
             self.browser.get_driver().find_element(
                 By.XPATH, self.config.TRUST_BUTTON_XPATH).click()
+            # Запрос секретного кода
+            await message.answer("Введите секретный код:")
+            await UserStates.code.set()
             logger.info("Завершение __authorize_by_qr AuthHandler")
             return True
         except Exception as e:
@@ -155,11 +153,11 @@ class AuthHandler(BaseHandler):
                 f"__authorize_by_qr AuthHandler был завершен с ошибкой: {e}")
             return False
 
-    async def __handle_code(self, message: types.Message, state: FSMContext) -> None:
+    async def handle_code(self, message: types.Message, state: FSMContext) -> None:
         """
         Обработчик ввода секретного кода.
         """
-        logger.info("Запуск __handle_code AuthHandler")
+        logger.info("Запуск handle_code AuthHandler")
         try:
             code = message.text
             # Проверка ввода
@@ -172,9 +170,9 @@ class AuthHandler(BaseHandler):
                 await message.answer("Авторизация завершена!")
                 await state.finish()
         except Exception as e:
-            logger.error(f"Ошибка __handle_code AuthHandler: {e}")
+            logger.error(f"Ошибка handle_code AuthHandler: {e}")
             await message.reply("Произошла ошибка при авторизации. Попробуйте снова.")
-        logger.info("Завершение __handle_code AuthHandler")
+        logger.info("Завершение handle_code AuthHandler")
 
     async def __complete_authorization(self, code: str) -> None:
         """
