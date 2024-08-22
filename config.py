@@ -30,6 +30,7 @@ class Config:
     AUTH_URL = os.getenv('AUTH_URL')
     GAME_URL = os.getenv('GAME_URL')
     LK_URL = os.getenv('LK_URL')
+    GAME_URL_FAKE = os.getenv('GAME_URL_FAKE')
     QR_XPATH = os.getenv('QR_XPATH')
     CLICK_TARGET_XPATH = os.getenv('CLICK_XPATH')
     AVAILABLE_CLICKS_XPATH = os.getenv('AVAILABLE_CLICKS_XPATH')
