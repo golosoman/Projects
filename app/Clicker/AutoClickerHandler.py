@@ -80,7 +80,12 @@ class AutoClickerHandler(BaseHandler):
         """
         logger.info("Запуск start_autoclicker_command AutoClickerHandler")
         try:
-            self.browser.get_driver().get(self.config.GAME_URL)
+            # Проверяем, уже ли открыта страница игры
+            current_url = self.browser.get_driver().current_url
+            if current_url != self.config.GAME_URL:
+                self.browser.get_driver().get(self.config.GAME_URL)
+            
+             # Проверяем, есть ли запущенный автокликер
             if self.autoclicker_config.get_status():
                 await message.answer("Автокликер уже запущен.")
             else:
