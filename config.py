@@ -1,7 +1,10 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Загрузка .env
+
+# Загрузка .env
+load_dotenv()
+
 
 class Config:
     """
@@ -34,9 +37,10 @@ class Config:
     CODE_INPUT_XPATH_1 = os.getenv('CODE_INPUT_XPATH_1')
     CODE_INPUT_XPATH_2 = os.getenv('CODE_INPUT_XPATH_2')
     SAVE_BUTTON_XPATH = os.getenv('SAVE_BUTTON_XPATH')
+    MY_GAME_MONEY = os.getenv('MY_GAME_MONEY')
     WEB_DRIVER_WAIT = int(os.getenv('WEB_DRIVER_WAIT'))
     COUNT_CLICKS_PER_SECOND = float(os.getenv('COUNT_CLICKS_PER_SECOND'))
     TYPE_BROWSER = os.getenv('TYPE_BROWSER')
 
 
-config = Config() 
+config = Config()

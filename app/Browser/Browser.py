@@ -1,8 +1,12 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
-from configs import config, Config
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium import webdriver
-from selenium.webdriver import Chrome
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from config import config, Config
+from ..Log import logger
+
 
 class Browser:
     """
@@ -20,34 +24,49 @@ class Browser:
         Args:
             config: Объект конфигурации Config, используемый для настройки браузера.
         """
+        logger.info("Запуск __init__ Browser")
         self.__driver = self.init_driver()
-        self.__wait_time = WebDriverWait(self.__driver, int(config.WEB_DRIVER_WAIT))
+        self.__wait_time = WebDriverWait(
+            self.__driver, int(config.WEB_DRIVER_WAIT))
+        logger.info("Завершение __init__ Browser")
 
-    def init_driver(self) -> Chrome:
+    def init_driver(self, config: Config) -> webdriver.Chrome | webdriver.Firefox:
         """
         Инициализирует драйвер браузера.
 
         Args:
-            None
+            config: Объект конфигурации Config, используемый для настройки браузера.
 
         Returns:
-            Объект Chrome, представляющий драйвер браузера.
+            Объект WebDriver, представляющий драйвер браузера.
         """
-        options = Options()
+        logger.info("Запуск init_driver Browser")
         if config.TYPE_BROWSER == "CHROME":
-            options.add_argument('--headless=new')
-            driver = webdriver.Chrome(options=options)
+            chrome_options = Options()
+            chrome_options.add_argument('--headless=new')
+            driver = webdriver.Chrome(
+                service=ChromeService(), options=chrome_options)
+        elif config.TYPE_BROWSER == "FIREFOX":
+            firefox_options = FirefoxOptions()
+            firefox_options.add_argument('--headless=new')
+            driver = webdriver.Firefox(
+                service=FirefoxService(), options=firefox_options)
+        else:
+            raise ValueError("Неверный тип браузера в конфигурации.")
+
+        logger.info("Завершение init_driver Browser")
         return driver
-    
-    def get_driver(self) -> Chrome:
+
+    def get_driver(self) -> webdriver.Chrome | webdriver.Firefox:
         """
         Возвращает объект WebDriver.
 
         Returns:
             Объект Chrome, представляющий драйвер браузера.
         """
-        return self.__driver 
-    
+        logger.debug("Отработал get_driver Browser")
+        return self.__driver
+
     def get_wait_time(self) -> WebDriverWait:
         """
         Возвращает объект WebDriverWait.
@@ -55,8 +74,9 @@ class Browser:
         Returns:
             Объект WebDriverWait, отвечающий за ожидание загрузки элементов на странице.
         """
+        logger.debug("Отработал get_wait_time Browser")
         return self.__wait_time
-    
+
     def set_wait_time(self, wait_time: int) -> None:
         """
         Устанавливает новое время ожидания для WebDriverWait.
@@ -65,9 +85,12 @@ class Browser:
             wait_time: Новое время ожидания в секундах.
         """
         self.__wait_time = WebDriverWait(self.__driver, wait_time)
+        logger.debug("Отработал set_wait_time Browser")
 
     def __del__(self) -> None:
         """
         Закрывает драйвер браузера при удалении объекта Browser.
         """
-        self.__driver.quit() 
+        logger.info("Запуск __del__ Browser")
+        self.__driver.quit()
+        logger.info("Завершение __del__ Browser")
