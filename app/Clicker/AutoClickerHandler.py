@@ -84,7 +84,7 @@ class AutoClickerHandler(BaseHandler):
             current_url = self.browser.get_driver().current_url
             if (current_url != self.config.GAME_URL_FAKE):
                 self.browser.get_driver().get(self.config.GAME_URL)
-            
+
              # Проверяем, есть ли запущенный автокликер
             if self.autoclicker_config.get_status():
                 await message.answer("Автокликер уже запущен.")
@@ -114,8 +114,6 @@ class AutoClickerHandler(BaseHandler):
         """
         logger.info("Запуск __autoclick_loop AutoClickerHandler")
         try:
-            element = self.browser.get_wait_time().until(
-                EC.presence_of_element_located((By.XPATH, self.config.CLICK_TARGET_XPATH)))
             count_clicks = 0
             logger.debug("Элемент для кликов на странице был найден!")
             while True:
@@ -123,7 +121,8 @@ class AutoClickerHandler(BaseHandler):
                     # Задержка между кликами
                     await asyncio.sleep(1 / self.autoclicker_config.get_clicks_per_second())
                     # Клик по элементу
-                    element.click()
+                    self.browser.get_wait_time().until(
+                        EC.presence_of_element_located((By.XPATH, self.config.CLICK_TARGET_XPATH))).click()
                     count_clicks += 1
                     if (count_clicks == 10000):
                         logger.debug(
@@ -142,6 +141,7 @@ class AutoClickerHandler(BaseHandler):
         except Exception as e:
             logger.error(
                 f"__autoclick_loop AutoClickerHandler был завершен с ошибкой! {e}")
+            await self.stop_autoclicker_command(message)
         logger.info("Завершение __autoclick_loop AutoClickerHandler")
 
     async def stop_autoclicker_command(self, message: types.Message) -> None:
