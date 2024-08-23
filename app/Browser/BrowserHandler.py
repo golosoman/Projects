@@ -85,7 +85,7 @@ class BrowserHandler(BaseHandler):
             logger.error(
                 f"print_page_text_command BrowserHandler был завершен с ошибкой! {e}")
             await message.answer("Не удалось получить текст со страницы!")
-        logger.info("Завершение reload_command BrowserHandler")
+        logger.info("Завершение print_page_text_command BrowserHandler")
 
     async def go_to_game_page_command(self, message: types.Message) -> None:
         """
