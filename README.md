@@ -10,7 +10,7 @@
 
 Backend написан на языке Java с использованием фреймворка Spring Boot. Frontend написан на TypeScript с использованием фреймворка Vue.
 
-[https://github.com/golosoman/Projects/tree/master/Medical_Calculator_Spring_Boot]("Медицинские Калькуляторы")
+[Медицинские Калькуляторы](https://github.com/golosoman/Projects/tree/master/Medical_Calculator_Spring_Boot)
 
 ### Мобильное приложение для заметок
 
