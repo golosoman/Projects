@@ -22,7 +22,7 @@ Backend написан на языке TypeScript с использование�
 
 Телеграм бот разработан на языке python.
 
-[Alfa_Parser](https://github.com/golosoman/Projects/tree/master/Alfa_Parsere)
+[Alfa_Parser](https://github.com/golosoman/Projects/tree/master/Alfa_Parser)
 
 ### Веб приложение "Мир_книг"
 
