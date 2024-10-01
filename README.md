@@ -4,27 +4,27 @@
 
 ## Проекты
 
-### Веб-сайт для пиццерии
+### Веб приложение "Медицинские_Калькуляторы"
 
-Веб приложение "Медицинские Калькуляторы"
+Backend написан на языке Java с использованием фреймворка Spring Boot, Frontend написан на языке TypeScript с использованием фреймворка Vue.js
 
-Backend написан на языке Java с использованием фреймворка Spring Boot. Frontend написан на TypeScript с использованием фреймворка Vue.
+Приложение написано в рамках выполнения летней практики в компании "Открытый код"
 
-[Медицинские Калькуляторы](https://github.com/golosoman/Projects/tree/master/Medical_Calculator_Spring_Boot)
+[Медицинские_Калькуляторы](https://github.com/golosoman/Projects/tree/master/Medical_Calculator_Spring_Boot)
 
-### Мобильное приложение для заметок
+### Веб приложение "Гига_Форум"
 
-Приложение для Android, которое позволяет пользователям создавать и редактировать заметки.
+Backend написан на языке TypeScript с использованием фреймворка Nest.js, Frontend написан на языке TypeScript с использованием фреймворка Vue.js
 
-[https://github.com/your-username/notes-app](https://github.com/your-username/notes-app)
+[Giga_Forum](https://github.com/golosoman/Projects/tree/master/Giga_Forum)
 
-### Игра на Python
+### Телеграм бот "Альфа_Парсер"
 
-Простая игра на Python, написанная для обучения программированию.
+Телеграм бот разработан на языке python.
 
-[https://github.com/your-username/python-game](https://github.com/your-username/python-game)
+[Alfa_Parser](https://github.com/golosoman/Projects/tree/master/Alfa_Parsere)
 
-## Дополнительная информация
+### Веб приложение "Мир_книг"
 
-- [https://github.com/your-username](https://github.com/your-username)
-- [https://your-website.com](https://your-website.com)
+Backend написан на языке python с использованием фреймворка Django, Frontend написан c использованием HTML и CSS
+[Мир_книг](https://github.com/golosoman/django_world_book)
