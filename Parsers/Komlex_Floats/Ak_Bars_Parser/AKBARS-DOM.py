@@ -6,40 +6,26 @@ from prefect import flow
 from datetime import date
 from geopy.geocoders import Nominatim
 import utils
-from itertools import chain
 
-PRICE_REGEX = re.compile(r"[\d\s]+")
 STAGE_REGEX = re.compile("(IV|I{1,3}|VI{0,3}|[IVX]+)\D+(\d{4})")
 ALL_FLATS_COUNTER = 0
 
 @flow(log_prints=True)
 def parse():
-    parse_core_iterative()
-
-def parse_core_iterative():
+    utils.upload(parse_core())
+ 
+def parse_core():
     """
     Основная функция парсинга с постепенной записью данных в JSON-файл.
     """
     content = {
         "systemName": "akbars-dom",
-        "name": "Ак Барс Дом"
+        "name": "Ак Барс Дом",
+        "residentialComplexes": list(parse_complexes())
     }
-
-    with open("akbars-dom.json", "w", encoding="utf-8") as file:
-        file.write('{\n')
-        file.write(f'"systemName": "{content["systemName"]}",\n')
-        file.write(f'"name": "{content["name"]}",\n')
-        file.write('"residentialComplexes": [\n')
-        
-        first = True
-        for complex_data in parse_complexes():
-            if not first:
-                file.write(',\n')
-            else:
-                first = False
-            json.dump(complex_data, file, indent=4, ensure_ascii=False)
-        
-        file.write('\n]\n}')
+    with open("akbars-dom.json", "w",  encoding="utf-8") as file:
+        json.dump(content, file, indent=4, ensure_ascii=False)
+    return content
 
 def parse_complexes():
     """
@@ -57,55 +43,23 @@ def parse_complexes():
 
     for project in project_data:
         flats = list(parse_flats(project["slug"], project["link"]))
+        lat, lon = project["coords"]
         if flats:
-            yield format_project_output(project, flats)
+            yield {
+                'internalId': project["slug"],
+                'name': project["name"],
+                'geoLocation': {
+                    'latitude': lat,
+                    'longitude': lon
+                },
+                'renderImageUrl': project["img_url"],
+                'presentationUrl': project["project_link"],
+                'flats': flats
+            }
 
     print(f"Flats: {ALL_FLATS_COUNTER}\nProjects are parsed")
 
-def extract_project_data(project_soup, data_json):
-    """
-    Извлечение данных о жилых комплексах.
-    """
-    complexes_dict = {complex_info["NAME"]: complex_info for complex_info in data_json["COMPLEXES"].values()}
-    soup_data = {}
-    
-    for complex in project_soup:
-        complex_title = complex.select_one(".complexes--title").get_text(strip=True)
-        image_link = extract_image_url(complex)
-        complex_href = complex.get("href")
-        address_link = complex_href if "http" in complex_href else f"https://akbars-dom.ru{complex_href}"
-        coords = parse_address(address_link, 'Россия', 'Казань')
-        soup_data[complex_title.capitalize()] = {'img_url': image_link, 'coords': coords}
-
-    return [
-        {
-            "name": complex_name,
-            "slug": complex_info['CODE'],
-            "link": fetch_links_not_in_list(complex_info["ID"]),
-            "coords": soup_data[complex_name.capitalize()]['coords'],
-            "img_url": soup_data[complex_name.capitalize()]['img_url']
-        }
-        for complex_name, complex_info in complexes_dict.items()
-    ]
-
-def format_project_output(project, flats):
-    """
-    Форматирование данных жилого комплекса для вывода.
-    """
-    lat, lon = project["coords"]
-    return {
-        'internalId': project["slug"],
-        'name': project["name"],
-        'geoLocation': {
-            'latitude': lat,
-            'longitude': lon
-        },
-        'renderImageUrl': project["img_url"],
-        'presentationUrl': None,
-        'flats': flats
-    }
-
-def parse_flats(slug, link):
+def parse_flats(slug: str, link: str):
     """
     Парсинг квартир для жилого комплекса.
     """
@@ -114,7 +68,7 @@ def parse_flats(slug, link):
         return []
 
     page_number = 1
-    flat_data_list = [] 
+    counter = 0
 
     while True:
         url = f"{link}?page={page_number}"
@@ -132,56 +86,65 @@ def parse_flats(slug, link):
             print("There is no content on the page. Completing the crawl.")
             break
 
-        flat_data_list.append([
-            parse_flat_data(item.find("a")['href'], slug)
-            for item in items if '/apartments/genplan-choose/' not in item.find("a")['href']
-        ])
+        for item in items:
+            link_href = item.find("a")['href']
+            if '/apartments/genplan-choose/' not in link_href:  # Исключаем нежелательные ссылки
+                counter += 1
+                response = httpx.get(f'https://akbars-dom.ru{link_href}', timeout=30)
+                new_soup = BeautifulSoup(response.text, "lxml")
+                content_block = new_soup.find(class_='Apartment_main__col__qi3ZL')
+
+                if content_block:
+                    price = parse_price(content_block)
+                    count_rooms = parse_count_rooms(new_soup)
+                    features = extract_apartment_features(content_block.select_one('.Apartment_features__m1EjQ'))
+                    image_url = parse_image(new_soup)
+                    yield {
+                        "residentialComplexInternalId": slug,
+                        "developerUrl": f"https://akbars-dom.ru{link_href}",
+                        "price": price,
+                        "floor": features.get('floor'),
+                        "area": features.get("area"),
+                        "rooms": count_rooms,
+                        "buildingDeadline": features.get("deadline"),
+                        "layoutImageUrl": image_url,
+                    }
+                else:
+                    print(f"The block with information about the apartment could not be found at the link: {link_href}")
 
         page_number += 1
 
-    all_flats = list(chain.from_iterable(flat_data_list))
-
-    if all_flats:
+    if counter:
         global ALL_FLATS_COUNTER
-        ALL_FLATS_COUNTER += len(all_flats)
-        print(f"Flats for {slug} parsed, count: {len(all_flats)}")
+        ALL_FLATS_COUNTER += counter
+        print(f"Flats for {slug} parsed, count: {counter}")
 
-    return all_flats
-
-def parse_flat_data(link_href, slug):
+def extract_project_data(project_soup: BeautifulSoup, data_json: dict):
     """
-    Парсинг данных о конкретной квартире.
+    Извлечение данных о жилых комплексах.
     """
-    try:
-        response = httpx.get(f'https://akbars-dom.ru{link_href}', timeout=30)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, "lxml")
-        content_block = soup.find(class_='Apartment_main__col__qi3ZL')
+    complexes_dict = {complex_info["NAME"]: complex_info for complex_info in data_json["COMPLEXES"].values()}
+    soup_data = {}
+    
+    for complex in project_soup:
+        complex_title = complex.select_one(".complexes--title").get_text(strip=True)
+        image_link = extract_image_url(complex)
+        complex_href = complex.get("href")
+        address_link = complex_href if "http" in complex_href else f"https://akbars-dom.ru{complex_href}"
+        coords = parse_address(address_link, 'Россия', 'Республика татарстан')
+        soup_data[complex_title.capitalize()] = {'img_url': image_link, 'coords': coords}
 
-        if not content_block:
-            print(f"The block with information about the apartment could not be found at the link: {link_href}")
-            return None
-
-        price = parse_price(content_block)
-        count_rooms = parse_count_rooms(soup)
-        features = extract_apartment_features(content_block.select_one('.Apartment_features__m1EjQ'))
-        image_url = parse_image(soup)
-
-        return {
-            "residentialComplexInternalId": slug,
-            "developerUrl": f"https://akbars-dom.ru{link_href}",
-            "price": price,
-            "floor": features.get('floor'),
-            "area": features.get("area"),
-            "rooms": count_rooms,
-            "buildingDeadline": features.get("deadline"),
-            "layoutImageUrl": image_url,
+    return [
+        {
+            "name": complex_name,
+            "slug": complex_info['CODE'],
+            "link": fetch_links_not_in_list(complex_info["ID"]),
+            "project_link": address_link,
+            "coords": soup_data[complex_name.capitalize()]['coords'],
+            "img_url": soup_data[complex_name.capitalize()]['img_url']
         }
-    except httpx.RequestError as e:
-        print(f"Error when requesting an apartment via the link {link_href}: {e}")
-    except httpx.HTTPStatusError as e:
-        print(f"HTTP error when requesting an apartment via a link {link_href}: {e}")
-    return None
+        for complex_name, complex_info in complexes_dict.items()
+    ]
 
 def parse_price(soup):
     """
@@ -250,41 +213,6 @@ def parse_floor(soup):
         if floor_value:
             return int(floor_value.get_text(strip=True).split('/')[0])
     print("Couldn't find the floor.")
-    return None
-
-def parse_flat_data(link_href, slug):
-    """
-    Парсинг данных квартиры.
-    """
-    try:
-        response = httpx.get(f'https://akbars-dom.ru{link_href}', timeout=30)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, "lxml")
-        content_block = soup.find(class_='Apartment_main__col__qi3ZL')
-
-        if not content_block:
-            print(f"The block with information about the apartment could not be found at the link: {link_href}")
-            return None
-
-        price = parse_price(content_block)
-        count_rooms = parse_count_rooms(soup)
-        features = extract_apartment_features(content_block.select_one('.Apartment_features__m1EjQ'))
-        image_url = parse_image(soup)
-
-        return {
-            "residentialComplexInternalId": slug,
-            "developerUrl": f"https://akbars-dom.ru{link_href}",
-            "price": price,
-            "floor": features.get('floor'),
-            "area": features.get("area"),
-            "rooms": count_rooms,
-            "buildingDeadline": features.get("deadline"),
-            "layoutImageUrl": image_url,
-        }
-    except httpx.RequestError as e:
-        print(f"Error when requesting an apartment via the link {link_href}: {e}")
-    except httpx.HTTPStatusError as e:
-        print(f"HTTP error when requesting an apartment via a link {link_href}: {e}")
     return None
 
 def parse_price(soup):
@@ -421,9 +349,10 @@ def extract_image_url(project):
     match = re.search(r'url\((.*?)\)', style)
     return "https://akbars-dom.ru" + match.group(1).strip(" '\"") if match else None
 
-def parse_address(project_link, country_name, town_name):
+def parse_address(project_link, country_name, region):
     """
-    Парсинг адреса.
+    Извлекает адрес проекта из HTML-контента.
+    Если адрес не найден, пытается получить координаты по названию страны и региона.
     """
     try:
         response = httpx.get(project_link, timeout=30)
@@ -440,13 +369,13 @@ def parse_address(project_link, country_name, town_name):
     
     # Если адрес не найден, пробуем получить координаты
     if not address_content:
-        return try_get_coords(country_name, town_name)
+        return try_get_coords(country_name, region)
 
     address = address_content.get_text(strip=True)
     address = expand_abbreviations(address)
 
-    result = get_coords(address) if address else try_get_coords(country_name, town_name)
-    return result or try_get_coords(country_name, town_name)
+    result = get_coords(address) if address else try_get_coords(country_name, region)
+    return result or try_get_coords(country_name, region)
 
 def expand_abbreviations(address):
     """
@@ -455,14 +384,10 @@ def expand_abbreviations(address):
     abbreviations = {
         'пр.': 'проспект',
         'ул.': 'улица',
-        'пл.': 'площадь',
-        'б-р': 'бульвар',
-        'ш.': 'шоссе',
-        'кв.': 'квартира',
         'д.': 'дом',
-        'пер.': 'переулок',
         'с.': 'село',
-        'р-он.': 'Район'
+        'р-н.': 'район',
+        'р-он': 'район'
     }
     
     for abbr, full in abbreviations.items():
@@ -470,11 +395,11 @@ def expand_abbreviations(address):
         
     return address
 
-def try_get_coords(country_name, town_name):
+def try_get_coords(country_name, region):
     """
     Попробовать получить координаты.
     """
-    result = get_coords(f'{country_name} {town_name}')
+    result = get_coords(f'{country_name} {region}')
     if result:
         return result
     return get_coords(f'{country_name}')
@@ -490,7 +415,6 @@ def get_coords(address):
         if getLoc:
             return [getLoc.latitude, getLoc.longitude]
         else:
-            # print(f"Couldn't find the coordinates for the address: {address}")
             return None
     
     except Exception as e:
@@ -498,4 +422,4 @@ def get_coords(address):
         return None
 
 if __name__ == '__main__':
-    parse_core_iterative()
+    print(json.dumps(parse_core()))

@@ -4,6 +4,7 @@ import json
 import re
 from prefect import flow
 from geopy.geocoders import Nominatim
+import utils
 
 ALL_FLATS_COUNTER = 0
 
@@ -13,33 +14,22 @@ def parse():
     Запускает основной процесс парсинга данных.
     Вызывает функцию для выполнения парсинга с постепенной записью данных в JSON-файл.
     """
-    parse_core_iterative()
+    utils.upload(parse_core())
 
-def parse_core_iterative():
+def parse_core():
     """
     Основная функция парсинга, которая записывает данные о жилых комплексах в JSON-файл.
     Создает файл, записывает в него информацию о системе и жилых комплексах.
     """
     content = {
         "systemName": "dsk-vrn",
-        "name": "ДСК Воронеж"
+        "name": "ДСК Воронеж",
+        "residentialComplexes": list(parse_complexes())
     }
 
-    with open("dsk-vrn.json", "w", encoding="utf-8") as file:
-        file.write('{\n')
-        file.write(f'"systemName": "{content["systemName"]}",\n')
-        file.write(f'"name": "{content["name"]}",\n')
-        file.write('"residentialComplexes": [\n')
-        
-        first = True
-        for complex_data in parse_complexes():
-            if not first:
-                file.write(',\n')
-            else:
-                first = False
-            json.dump(complex_data, file, indent=4, ensure_ascii=False)
-        
-        file.write('\n]\n}')
+    with open("dsk-vrn.json", "w",  encoding="utf-8") as file:
+        json.dump(content, file, indent=4, ensure_ascii=False)
+    return content
 
 def parse_complexes():
     """
@@ -58,28 +48,92 @@ def parse_complexes():
     
     for project in project_data:
         flats = list(parse_flats(project["slug"], project["filter_link"]))
+        lat, lon = project["coords"]
         if flats:
-            yield format_project_output(project, flats)
+            yield {
+                'internalId': project["slug"],
+                'name': project['name'],
+                'geoLocation': {
+                    'latitude': lat,
+                    'longitude': lon
+                },
+                'renderImageUrl': project["img_url"],
+                'presentationUrl': project['link'],
+                'flats': flats
+            }
 
     print(f"Flats: {ALL_FLATS_COUNTER}\nProjects are parsed")
 
-def format_project_output(project, flats):
+def parse_flats(slug, link):
     """
-    Форматирует данные о жилом комплексе для вывода в удобном формате.
-    Возвращает словарь с информацией о жилом комплексе, включая его координаты и список квартир.
+    Извлекает информацию о квартирах для указанного жилого комплекса.
+    Возвращает генератор, который выдает данные о каждой квартире.
+    Если ссылка недоступна или произошла ошибка, возвращает пустой список.
     """
-    lat, lon = project["coords"]
-    return {
-        'internalId': project["slug"],
-        'name': project['name'],
-        'geoLocation': {
-            'latitude': lat,
-            'longitude': lon
-        },
-        'renderImageUrl': project["img_url"],
-        'presentationUrl': project['link'],
-        'flats': flats
-    }
+    print(f'parse flat from id: {slug}, url: {link}')
+    if not link:
+        return []
+    
+    counter = 0
+    page_number = 1
+
+    while True:
+        url = f"{link}&PAGEN_1={page_number}"
+        try:
+            response = httpx.get(url, timeout=30)
+            response.raise_for_status()
+        except (httpx.RequestError, httpx.HTTPStatusError) as e:
+            print(f"Error when requesting a page {page_number}: {e}")
+            break
+
+        soup = BeautifulSoup(response.text, "lxml")
+        items = soup.find_all('a', class_='flats-item__layout')
+        
+        if not items:
+            print("There is no content on the page. Completing the crawl.")
+            break
+        
+
+        for link_content in items:
+            counter += 1
+            link_href = link_content.get('href')
+            response = httpx.get(f'https://dsk.vrn.ru{link_href}', timeout=30)
+            new_soup = BeautifulSoup(response.text, "lxml")
+            content_block = new_soup.find(class_='flat_detail_desc_wr')
+
+            if content_block:
+                price = parse_price(content_block)
+                count_rooms = parse_count_rooms(content_block)
+                features = extract_apartment_features(content_block)
+                image_url = parse_plan_image(new_soup)
+
+                yield {
+                    "residentialComplexInternalId": slug,
+                    "developerUrl": f"https://dsk.vrn.ru{link_href}",
+                    "price": price,
+                    "floor": features.get('floor'),
+                    "area": features.get("area"),
+                    "rooms": count_rooms,
+                    "buildingDeadline": features.get("deadline"),
+                    "layoutImageUrl": image_url,
+                }
+                
+            else:
+                print(f"The block with information about the apartment could not be found at the link: {link_href}")
+
+        # Проверяем наличие элемента "Следующая"
+        next_page = soup.find('li', class_='page-item-next')
+        
+        if next_page is None:
+            print("End of the page")
+            break
+
+        page_number += 1
+
+    if counter:
+        global ALL_FLATS_COUNTER
+        ALL_FLATS_COUNTER += counter
+        print(f"Flats for {slug} parsed, count: {counter}")
 
 def extract_project_data(project_soup, data_json):
     """
@@ -132,92 +186,6 @@ def generate_link(filter_id_project):
     """
     url = f'https://dsk.vrn.ru/podobrat-kvartiru/?filter_30={filter_id_project}&filter_24_MIN=2475375&filter_24_MAX=16368060&filter_22_MIN=1&filter_22_MAX=24&set_filter=Показать'
     return url
-
-def parse_flats(slug, link):
-    """
-    Извлекает информацию о квартирах для указанного жилого комплекса.
-    Возвращает генератор, который выдает данные о каждой квартире.
-    Если ссылка недоступна или произошла ошибка, возвращает пустой список.
-    """
-    print(f'parse flat from id: {slug}, url: {link}')
-    if not link:
-        return []
-    
-    counter = 0
-    page_number = 1
-
-    while True:
-        url = f"{link}&PAGEN_1={page_number}"
-        try:
-            response = httpx.get(url, timeout=30)
-            response.raise_for_status()
-        except (httpx.RequestError, httpx.HTTPStatusError) as e:
-            print(f"Error when requesting a page {page_number}: {e}")
-            break
-
-        soup = BeautifulSoup(response.text, "lxml")
-
-        items = soup.find_all('a', class_='flats-item__layout')
-        
-        if not items:
-            print("There is no content on the page. Completing the crawl.")
-            break
-
-        for link_content in items:
-            counter += 1
-            yield parse_flat_data(link_content.get('href'), slug)
-
-        # Проверяем наличие элемента "Следующая"
-        next_page = soup.find('li', class_='page-item-next')
-        
-        if next_page is None:
-            print("End of the page")
-            break
-
-        page_number += 1
-
-    if counter:
-        global ALL_FLATS_COUNTER
-        ALL_FLATS_COUNTER += counter
-        print(f"Flats for {slug} parsed, count: {counter}")
-
-def parse_flat_data(link_href, slug):
-    """
-    Извлекает данные о конкретной квартире по указанной ссылке.
-    Возвращает словарь с информацией о квартире, если данные успешно извлечены.
-    В противном случае возвращает None.
-    """
-    try:
-        response = httpx.get(f'https://dsk.vrn.ru{link_href}', timeout=30)
-        response.raise_for_status()
-
-        soup = BeautifulSoup(response.text, "lxml")
-        content_block = soup.find(class_='flat_detail_desc_wr')
-
-        if not content_block:
-            print(f"The block with information about the apartment could not be found at the link: {link_href}")
-            return None
-
-        price = parse_price(content_block)
-        count_rooms = parse_count_rooms(content_block)
-        features = extract_apartment_features(content_block)
-        image_url = parse_plan_image(soup)
-
-        return {
-            "residentialComplexInternalId": slug,
-            "developerUrl": f"https://dsk.vrn.ru{link_href}",
-            "price": price,
-            "floor": features.get('floor'),
-            "area": features.get("area"),
-            "rooms": count_rooms,
-            "buildingDeadline": features.get("deadline"),
-            "layoutImageUrl": image_url,
-        }
-    except httpx.RequestError as e:
-        print(f"Error when requesting an apartment via the link {link_href}: {e}")
-    except httpx.HTTPStatusError as e:
-        print(f"HTTP error when requesting an apartment via a link {link_href}: {e}")
-    return None
 
 def parse_plan_image(soup):
     """
@@ -385,7 +353,6 @@ def try_get_coords(country_name, region):
         return result
     return get_coords(f'{country_name}')
 
-
 def get_coords(address):
     """
     Получает координаты (широту и долготу) для заданного адреса.
@@ -430,4 +397,4 @@ def parse_title(project_content):
     return title_content.get_text(strip=True)
 
 if __name__ == '__main__':
-    parse_core_iterative()
+    print(json.dumps(parse_core()))

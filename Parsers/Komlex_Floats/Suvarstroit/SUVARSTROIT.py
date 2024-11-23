@@ -5,6 +5,7 @@ import json
 import re
 from prefect import flow
 from geopy.geocoders import Nominatim
+import utils
 
 ALL_FLATS_COUNTER = 0
 
@@ -13,34 +14,22 @@ def parse():
     """
     Главная функция парсинга, которая инициирует процесс парсинга жилых комплексов и квартир.
     """
-    parse_core_iterative()
+    utils.upload(parse_core())
 
-def parse_core_iterative():
+def parse_core():
     """
     Основная функция парсинга с постепенной записью данных в JSON-файл.
     Создает структуру JSON и записывает данные о жилых комплексах и квартирах в файл.
     """
     content = {
         "systemName": "suvarstroit",
-        "name": "Суварстроит, Республика Татарстан (Татарстан)"
+        "name": "Суварстроит, Республика Татарстан (Татарстан)",
+        "residentialComplexes": list(parse_complexes())
     }
 
-    with open("suvarstroit.json", "w", encoding="utf-8") as file:
-        file.write('{\n')
-        file.write(f'"systemName": "{content["systemName"]}",\n')
-        file.write(f'"name": "{content["name"]}",\n')
-        file.write('"residentialComplexes": [\n')
-        
-        first = True
-        for complex_data in parse_complexes():
-            if not first:
-                file.write(',\n')
-            else:
-                first = False
-            # Запись данных о комплексе в JSON-файл
-            json.dump(complex_data, file, indent=4, ensure_ascii=False)
-        
-        file.write('\n]\n}')
+    with open("suvarstroit.json", "w",  encoding="utf-8") as file:
+        json.dump(content, file, indent=4, ensure_ascii=False)
+    return content
 
 def parse_complexes():
     """
@@ -60,49 +49,22 @@ def parse_complexes():
     project_data = extract_project_data(first_soup.find_all('li', class_='our-projects__list-item'), second_soup.find('ul', class_='filters__form-select-list'))
     
     for project in project_data:
+        lat, lon = project["coords"]
         flats = list(parse_flats(project["slug"], project["filter_link"]))
         if flats:
-            yield format_project_output(project, flats)
+            yield {
+                'internalId': project["slug"],
+                'name': project['name'],
+                'geoLocation': {
+                    'latitude': lat,
+                    'longitude': lon
+                },
+                'renderImageUrl': project["img_url"],
+                'presentationUrl': project['link'],
+                'flats': flats
+            }
 
     print(f"Flats: {ALL_FLATS_COUNTER}\nProjects are parsed")
-
-def extract_project_data(project_soup, id_project_soup):
-    """
-    Извлечение данных о жилых комплексах.
-    Возвращает список словарей с информацией о каждом жилом комплексе, включая название, ссылку, координаты и изображение.
-    """
-    list_content = id_project_soup.find_all('li')
-    result_dict = {}
-    
-    for item in list_content:
-        # Проверка наличия input и span
-        input_element = item.find('input', class_='filters__form-select-radio-input')
-        span_element = item.find('span', class_='filters__form-select-radio-text')
-        
-        if input_element and span_element:
-            input_value = input_element.get('value')
-            title_text = span_element.get_text(strip=True).title()
-            result_dict[title_text] = {'name': title_text, 'id': input_value}
-        else:
-            print("Элемент input или span не найден в элементе li.")
-
-    project_data = []
-    for project_item in project_soup:
-        project_title = parse_title(project_item)
-        project_img = parse_image(project_item)
-        project_address = parse_address(project_item, 'Россия', 'Республика Татарстан')
-        project_link = parse_link(project_item)
-        project = {
-            'name': project_title,
-            'link': f'https://suvarstroit.ru{project_link}/',
-            'slug': project_link.split('/')[3],
-            'filter_link': generate_link(result_dict[project_title.title()]['id']),
-            'coords': project_address,
-            'img_url': f'https://suvarstroit.ru{project_img}'
-        }
-        project_data.append(project)
-    
-    return project_data
 
 def parse_flats(slug, link):
     """
@@ -135,7 +97,21 @@ def parse_flats(slug, link):
 
         for card_content in items:
             counter += 1
-            yield parse_flat_data(card_content, slug)
+            link_href = parse_flat_link(card_content)
+            price = parse_flat_price(card_content)
+            count_rooms = parse_count_rooms(card_content)
+            features = extract_apartment_features(card_content)
+            image_url = parse_plan_image(card_content)
+            yield {
+                "residentialComplexInternalId": slug,
+                "developerUrl": f"https://suvarstroit.ru{link_href}",
+                "price": price,
+                "floor": features.get('floor'),
+                "area": features.get("area"),
+                "rooms": count_rooms,
+                "buildingDeadline": features.get("deadline"),
+                "layoutImageUrl": image_url,
+            }
 
         page_number += 1
 
@@ -144,34 +120,43 @@ def parse_flats(slug, link):
         ALL_FLATS_COUNTER += counter
         print(f"Flats for {slug} parsed, count: {counter}")
 
-def parse_flat_data(card_soup, slug):
+def extract_project_data(project_soup, id_project_soup):
     """
-    Парсинг данных о конкретной квартире.
-    Возвращает словарь с информацией о квартире, включая ссылку, цену, количество комнат и другие характеристики.
-    Если произошла ошибка при запросе данных, возвращает None.
+    Извлечение данных о жилых комплексах.
+    Возвращает список словарей с информацией о каждом жилом комплексе, включая название, ссылку, координаты и изображение.
     """
-    try:
-        link_href = parse_flat_link(card_soup)
-        price = parse_flat_price(card_soup)
-        count_rooms = parse_count_rooms(card_soup)
-        features = extract_apartment_features(card_soup)
-        image_url = parse_plan_image(card_soup)
+    list_content = id_project_soup.find_all('li')
+    result_dict = {}
+    
+    for item in list_content:
+        # Проверка наличия input и span
+        input_element = item.find('input', class_='filters__form-select-radio-input')
+        span_element = item.find('span', class_='filters__form-select-radio-text')
+        
+        if input_element and span_element:
+            input_value = input_element.get('value')
+            title_text = span_element.get_text(strip=True).title()
+            result_dict[title_text] = {'name': title_text, 'id': input_value}
+        else:
+            print("Элемент input или span не найден в элементе li.")
 
-        return {
-            "residentialComplexInternalId": slug,
-            "developerUrl": f"https://suvarstroit.ru{link_href}",
-            "price": price,
-            "floor": features.get('floor'),
-            "area": features.get("area"),
-            "rooms": count_rooms,
-            "buildingDeadline": features.get("deadline"),
-            "layoutImageUrl": image_url,
+    project_data = []
+    for project_item in project_soup:
+        project_title = parse_title(project_item)
+        project_img = parse_image(project_item)
+        project_address = parse_address(project_item, 'Россия', 'Республика Татарстан')
+        project_link = parse_link(project_item)
+        project = {
+            'name': project_title,
+            'link': f'https://suvarstroit.ru{project_link}/',
+            'slug': project_link.split('/')[1],
+            'filter_link': generate_link(result_dict[project_title.title()]['id']),
+            'coords': project_address,
+            'img_url': f'https://suvarstroit.ru{project_img}'
         }
-    except httpx.RequestError as e:
-        print(f"Error when requesting an apartment via the link {link_href}: {e}")
-    except httpx.HTTPStatusError as e:
-        print(f"HTTP error when requesting an apartment via a link {link_href}: {e}")
-    return None
+        project_data.append(project)
+    
+    return project_data
 
 def extract_apartment_features(card_soup):
     """
@@ -303,24 +288,6 @@ def generate_link(filter_id_project):
     url = f'https://suvarstroit.ru/search/flats/read?project={filter_id_project}&costFrom=5%C2%A0500%C2%A0000&costTo=30%C2%A0000%C2%A0000&areaFrom=0&areaTo=150'
     return url
 
-def format_project_output(project, flats):
-    """
-    Форматирует данные жилого комплекса для вывода.
-    Возвращает словарь с информацией о проекте, включая координаты, название и другие данные.
-    """
-    lat, lon = project["coords"]
-    return {
-        'internalId': project["slug"],
-        'name': project['name'],
-        'geoLocation': {
-            'latitude': lat,
-            'longitude': lon
-        },
-        'renderImageUrl': project["img_url"],
-        'presentationUrl': project['link'],
-        'flats': flats
-    }
-
 def parse_address(project_content, country_name, region):
     """
     Парсит адрес проекта из HTML-контента.
@@ -420,4 +387,4 @@ def parse_title(project_content):
 
 
 if __name__ == '__main__':
-    parse_core_iterative()
+    print(json.dumps(parse_core()))
