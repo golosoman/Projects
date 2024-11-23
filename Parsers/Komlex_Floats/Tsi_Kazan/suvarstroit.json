@@ -1,0 +1,264 @@
+{
+    "systemName": "tsi",
+    "name": "Группа компаний «tsi»",
+    "residentialComplexes": [
+        {
+            "internalId": "zhk-statnyy",
+            "name": "ЖК Статный",
+            "geoLocation": {
+                "latitude": 55.448217,
+                "longitude": 50.4763591
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/eb6/628_364_1/yu5sicpl6kkom1lzwrzhkgj42zexfax4.jpeg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-statnyy/",
+            "flats": []
+        },
+        {
+            "internalId": "zhk-prityazhenie",
+            "name": "ЖК Притяжение",
+            "geoLocation": {
+                "latitude": 55.448217,
+                "longitude": 50.4763591
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/868/628_364_1/17tbx8iulq342qm59z61c0jfqe8griso.jpg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-prityazhenie/",
+            "flats": []
+        },
+        {
+            "internalId": "zhk-dinastiya",
+            "name": "ЖК Династия",
+            "geoLocation": {
+                "latitude": 55.448217,
+                "longitude": 50.4763591
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/2e8/628_364_1/o477twavpgf0y5qrl21tzajv4wn8f2u9.jpg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-dinastiya/",
+            "flats": [
+                {
+                    "residentialComplexInternalId": "ЖК Династия",
+                    "developerUrl": "https://tsirt.ru/apartments/14748045/",
+                    "price": 4960000,
+                    "floor": 1,
+                    "area": 20.69,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/80b/600_402_1/z7bulk3owe50l9f92kxooax74onudbyb.png"
+                }
+            ]
+        },
+        {
+            "internalId": "zhk-mechta",
+            "name": "ЖК Мечта",
+            "geoLocation": {
+                "latitude": 55.448217,
+                "longitude": 50.4763591
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/7fc/628_364_1/r6su052otulyq1500n92jgz3jpa0je41.jpg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-mechta/",
+            "flats": []
+        },
+        {
+            "internalId": "zhk-raduzhnyy-2",
+            "name": "ЖК Радужный-2",
+            "geoLocation": {
+                "latitude": 55.8720232,
+                "longitude": 48.8942938062994
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/d12/628_364_1/15nv5ytfoau4oeqilr6nzef7gwyflogi.jpeg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-raduzhnyy-2/",
+            "flats": [
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952439/",
+                    "price": 3970000,
+                    "floor": 1,
+                    "area": 20.06,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/17a/600_402_1/1u1jpw8l3nwx0kn96pkrwjn3zks9su83.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952619/",
+                    "price": 4130000,
+                    "floor": 6,
+                    "area": 20.59,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/096/600_402_1/79n3c7bq4yng33gqw96igopghywinwyw.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996726/",
+                    "price": 4660000,
+                    "floor": 10,
+                    "area": 27.22,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/c2e/600_402_1/s2fcpjefmr6st0y8yroijetyho6udbob.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996719/",
+                    "price": 4770000,
+                    "floor": 9,
+                    "area": 27.22,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/c2e/600_402_1/s2fcpjefmr6st0y8yroijetyho6udbob.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996684/",
+                    "price": 4820000,
+                    "floor": 4,
+                    "area": 27.22,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/c2e/600_402_1/s2fcpjefmr6st0y8yroijetyho6udbob.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996771/",
+                    "price": 4890000,
+                    "floor": 9,
+                    "area": 27.95,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/6ad/600_402_1/52paxvw4xh1lhkhbz91ec9yj0gytybvg.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952410/",
+                    "price": 4940000,
+                    "floor": 1,
+                    "area": 25.2,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/643/600_402_1/u8bdtyiz58ik9w7l2l5adu2jtuc07ep7.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952609/",
+                    "price": 4980000,
+                    "floor": 2,
+                    "area": 25.2,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/bbd/600_402_1/7tvgujidg7z8gz82zq5eo3qjg8u1sn94.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952612/",
+                    "price": 4980000,
+                    "floor": 3,
+                    "area": 25.2,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/bbd/600_402_1/7tvgujidg7z8gz82zq5eo3qjg8u1sn94.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13952432/",
+                    "price": 4990000,
+                    "floor": 8,
+                    "area": 25.2,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/643/600_402_1/u8bdtyiz58ik9w7l2l5adu2jtuc07ep7.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956436/",
+                    "price": 5010000,
+                    "floor": 10,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956422/",
+                    "price": 5020000,
+                    "floor": 3,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956434/",
+                    "price": 5040000,
+                    "floor": 9,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956432/",
+                    "price": 5040000,
+                    "floor": 8,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956424/",
+                    "price": 5060000,
+                    "floor": 4,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/13956428/",
+                    "price": 5060000,
+                    "floor": 6,
+                    "area": 25.44,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-04-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/b74/600_402_1/9e10kdz9sf0s7nuucv15vpikjlw0qodf.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996735/",
+                    "price": 5090000,
+                    "floor": 1,
+                    "area": 30.08,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/16b/600_402_1/33ayik1ni70azvd2xqrzp2did77oki34.png"
+                },
+                {
+                    "residentialComplexInternalId": "ЖК Радужный-2",
+                    "developerUrl": "https://tsirt.ru/apartments/14996745/",
+                    "price": 5210000,
+                    "floor": 3,
+                    "area": 30.08,
+                    "rooms": 1,
+                    "buildingDeadline": "2026-10-01",
+                    "layoutImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/16b/600_402_1/33ayik1ni70azvd2xqrzp2did77oki34.png"
+                }
+            ]
+        },
+        {
+            "internalId": "zhk-rodina",
+            "name": "ЖК Родина",
+            "geoLocation": {
+                "latitude": 55.448217,
+                "longitude": 50.4763591
+            },
+            "renderImageUrl": "https://tsirt.ru/upload/resize_cache/iblock/9b7/628_364_1/iokirqkd5eakp81vfu7o61rpjom0sin9.jpeg",
+            "presentationUrl": "https://tsirt.ru//realty/zhk-rodina/",
+            "flats": []
+        }
+    ]
+}
